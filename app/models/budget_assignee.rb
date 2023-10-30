@@ -1,0 +1,2 @@
+class BudgetAssignee < ApplicationRecord
+end
