@@ -1,0 +1,45 @@
+<h1><%= @family.family_name %></h1>
+
+<h2>Members</h2>
+<% @family.members.each do |member| %>
+  <p><%= member.username %></p>
+<% end %>
+
+<h2>Last Expenses</h2>
+<table>
+  <tr>
+    <th>Description</th>
+    <th>Amount</th>
+    <th>Date</th>
+  </tr>
+  <% @family.expenditures.each do |expenditure| %>
+    <tr>
+      <td><%= expenditure.description %></td>
+      <td><%= expenditure.amount %></td>
+      <td><%= expenditure.date %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% @family.budgets.each do |budget| %>
+  <h2>Budget <%= budget.name %></h2>
+  <ul>
+    <li>Total Amount: <%= budget.amount %></li>
+    <li><%= budget.amount_left %> left to spend.</li>
+  </ul>
+  <h3>Expenses</h3>
+    <table>
+    <tr>
+      <th>Description</th>
+      <th>Amount</th>
+      <th>Date</th>
+    </tr>
+    <% budget.expenditures.each do |expenditure| %>
+      <tr>
+        <td><%= expenditure.description %></td>
+        <td><%= expenditure.amount %></td>
+        <td><%= expenditure.date %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
