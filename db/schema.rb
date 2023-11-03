@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_01_235932) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_03_014421) do
   create_table "budget_assignees", force: :cascade do |t|
     t.integer "budget_id", null: false
     t.integer "user_id", null: false
@@ -45,7 +45,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_235932) do
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "family_id"
     t.index ["budget_id"], name: "index_expenditures_on_budget_id"
+    t.index ["family_id"], name: "index_expenditures_on_family_id"
   end
 
   create_table "families", force: :cascade do |t|
@@ -78,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_01_235932) do
   add_foreign_key "expenditure_assignees", "expenditures"
   add_foreign_key "expenditure_assignees", "users"
   add_foreign_key "expenditures", "budgets"
+  add_foreign_key "expenditures", "families"
   add_foreign_key "family_members", "families"
   add_foreign_key "family_members", "users"
 end
