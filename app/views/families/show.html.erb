@@ -6,6 +6,7 @@
 <% end %>
 
 <h2>Last Expenses</h2>
+<%= link_to 'New Expense', new_expenditure_path(family_id: @family.id) %>
 <table>
   <tr>
     <th>Description</th>
