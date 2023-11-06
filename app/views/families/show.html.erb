@@ -12,12 +12,16 @@
     <th>Description</th>
     <th>Amount</th>
     <th>Date</th>
+    <th></th>
+    <th></th>
   </tr>
   <% @family.expenditures.each do |expenditure| %>
     <tr>
       <td><%= expenditure.description %></td>
       <td><%= expenditure.amount %></td>
       <td><%= expenditure.date %></td>
+      <td><%= link_to 'Edit', edit_expenditure_path(expenditure) %></td>
+      <td><%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
     </tr>
   <% end %>
 </table>
@@ -26,23 +30,29 @@
 
 <% @family.budgets.each do |budget| %>
   <h2>Budget <%= budget.name %></h2>
+  <%= link_to 'Edit Budget', edit_budget_path(budget) %>
+  <%= link_to 'Delete Budget', budget_path(budget), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
   <ul>
     <li>Total Amount: <%= budget.amount %></li>
     <li><%= budget.amount_left %> left to spend.</li>
   </ul>
   <h3>Expenses</h3>
   <%= link_to 'New Budget Expense', new_expenditure_path(family_id: @family.id, budget_id: budget.id) %>
-    <table>
+  <table>
     <tr>
       <th>Description</th>
       <th>Amount</th>
       <th>Date</th>
+      <th></th>
+      <th></th>
     </tr>
     <% budget.expenditures.each do |expenditure| %>
       <tr>
         <td><%= expenditure.description %></td>
         <td><%= expenditure.amount %></td>
         <td><%= expenditure.date %></td>
+        <td><%= link_to 'Edit', edit_expenditure_path(expenditure) %></td>
+        <td><%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
       </tr>
     <% end %>
   </table>

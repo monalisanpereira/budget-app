@@ -10,6 +10,11 @@ class ExpendituresController < ApplicationController
     end
   end
 
+  def edit
+    @expenditure = Expenditure.find(params[:id])
+    @budgets = @expenditure.family.budgets
+  end
+
   def create
     @expenditure = Expenditure.new(expenditure_params)
 
@@ -18,6 +23,24 @@ class ExpendituresController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def update
+    @expenditure = Expenditure.find(params[:id])
+
+    if @expenditure.update(expenditure_params)
+      redirect_to family_path(@expenditure.family)
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @expenditure = Expenditure.find(params[:id])
+    family = @expenditure.family
+    @expenditure.destroy
+
+    redirect_to family_path(family), status: :see_other
   end
 
   private
