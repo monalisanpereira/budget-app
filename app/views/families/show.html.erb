@@ -22,6 +22,8 @@
   <% end %>
 </table>
 
+<%= link_to 'New Budget', new_budget_path(family_id: @family.id) %>
+
 <% @family.budgets.each do |budget| %>
   <h2>Budget <%= budget.name %></h2>
   <ul>
@@ -29,6 +31,7 @@
     <li><%= budget.amount_left %> left to spend.</li>
   </ul>
   <h3>Expenses</h3>
+  <%= link_to 'New Budget Expense', new_expenditure_path(family_id: @family.id, budget_id: budget.id) %>
     <table>
     <tr>
       <th>Description</th>

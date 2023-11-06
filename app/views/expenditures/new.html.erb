@@ -21,6 +21,8 @@
     <%= f.label :date %><br>
     <%= f.date_field :date %>
   </div>
+  
+  <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }, params[:budget_id]), { include_blank: 'Select a budget' } %>
 
   <%= f.hidden_field :family_id %>
 
