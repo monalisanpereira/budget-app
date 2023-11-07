@@ -2,12 +2,15 @@ class ExpendituresController < ApplicationController
   def new
     family = Family.find(params[:family_id])
     @budgets = family.budgets
+    @members = family.members
 
     if params[:budget_id].present?
       @expenditure = Expenditure.new(family: family, budget: Budget.find(params[:budget_id]))
     else
       @expenditure = Expenditure.new(family: family)
     end
+
+    @expenditure_assignees = @members.map { |member| @expenditure.expenditure_assignees.build(user: member) }
   end
 
   def edit
@@ -45,6 +48,6 @@ class ExpendituresController < ApplicationController
 
   private
     def expenditure_params
-      params.require(:expenditure).permit(:description, :amount, :family_id, :date, :budget_id)
+      params.require(:expenditure).permit(:description, :amount, :family_id, :date, :budget_id, expenditure_assignees_attributes: [:percentage, :user_id])
     end
 end
