@@ -1,0 +1,33 @@
+<%= form_with model: @budget do |f| %>
+  <div>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+    <% @budget.errors.full_messages_for(:name).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :amount %><br>
+    <%= f.number_field :amount %>
+    <% @budget.errors.full_messages_for(:amount).each do |message| %>
+      <div><%= message %></div>
+    <% end %>
+  </div>
+
+  <div id="members_percentage">
+    <% @budget_assignees.each do |budget_assignee| %>
+      <%= f.fields_for :budget_assignees, budget_assignee do |ba| %>
+        <%= ba.hidden_field :user_id %>
+        <%= ba.label :percentage, ba.object.user.username %>
+        <%= ba.number_field :percentage %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= f.hidden_field :family_id %>
+
+  <div>
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -16,6 +16,11 @@ class ExpendituresController < ApplicationController
   def edit
     @expenditure = Expenditure.find(params[:id])
     @budgets = @expenditure.family.budgets
+    if @expenditure.expenditure_assignees.present?
+      @expenditure_assignees = @expenditure.expenditure_assignees
+    else
+      @expenditure_assignees = @expenditure.family.members.map { |member| @expenditure.expenditure_assignees.build(user: member) }
+    end
   end
 
   def create
@@ -32,6 +37,9 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.find(params[:id])
 
     if @expenditure.update(expenditure_params)
+      if expenditure_params[:budget_id].present? && @expenditure.expenditure_assignees.present?
+        @expenditure.expenditure_assignees.destroy_all
+      end
       redirect_to family_path(@expenditure.family)
     else
       render :edit, status: :unprocessable_entity
@@ -48,6 +56,6 @@ class ExpendituresController < ApplicationController
 
   private
     def expenditure_params
-      params.require(:expenditure).permit(:description, :amount, :family_id, :date, :budget_id, expenditure_assignees_attributes: [:percentage, :user_id])
+      params.require(:expenditure).permit(:description, :amount, :family_id, :date, :budget_id, expenditure_assignees_attributes: [:id, :user_id, :percentage])
     end
 end

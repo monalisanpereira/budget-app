@@ -4,11 +4,7 @@ class Budget < ApplicationRecord
   has_many :budget_assignees
   has_many :assignees, through: :budget_assignees, source: :user
 
-  def create_expenditure(attributes)
-    expenditure = expenditures.create(attributes)
-    expenditure.update(family: family)
-    expenditure
-  end
+  accepts_nested_attributes_for :budget_assignees, reject_if: proc { |attributes| attributes['percentage'].to_i.zero? }
 
   def amount_left
     result = amount

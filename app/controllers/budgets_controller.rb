@@ -1,6 +1,9 @@
 class BudgetsController < ApplicationController
   def new
-    @budget = Budget.new(family: Family.find(params[:family_id]))
+    family = Family.find(params[:family_id])
+    @budget = Budget.new(family: family)
+    @members = family.members
+    @budget_assignees = @members.map { |member| @budget.budget_assignees.build(user: member) }
   end
   
   def create
@@ -15,6 +18,12 @@ class BudgetsController < ApplicationController
 
   def edit
     @budget = Budget.find(params[:id])
+
+    if @budget.budget_assignees.present?
+      @budget_assignees = @budget.budget_assignees
+    else
+      @budget_assignees = @budget.family.members.map { |member| @budget.budget_assignees.build(user: member) }
+    end
   end
 
   def update
@@ -37,6 +46,6 @@ class BudgetsController < ApplicationController
   
   private
     def budget_params
-      params.require(:budget).permit(:name, :amount, :family_id)
+      params.require(:budget).permit(:name, :amount, :family_id, budget_assignees_attributes: [:id, :user_id, :percentage])
     end
 end
