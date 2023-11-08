@@ -20,7 +20,7 @@
     <% end %>
   </div>
 
-  <% if params[:budget_id].present? %>
+  <% if params[:budget_id].present? || @expenditure.expenditure_assignees.present? %>
     <input type="checkbox" id="budget_checkbox" checked>Budget Expense</input>
     <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }, params[:budget_id]) %>
     <div id="members_percentage" style='display:none'>
@@ -53,27 +53,25 @@
   </div>
 <% end %>
 
-<script defer>
-  document.addEventListener("DOMContentLoaded", function() {
-    const budgetCheckbox = document.getElementById("budget_checkbox");
-    const budgetSelect = document.getElementById("expenditure_budget_id");
-    const membersPercentageField = document.getElementById("members_percentage");
-    const percentageFields = membersPercentageField.querySelectorAll("input[type=number]");
-  
-    function toggleSelectVisibility() {
-      if (budgetCheckbox.checked) {
-        budgetSelect.style.display = "block";
-        membersPercentageField.style.display = "none";
-        percentageFields.forEach(function(field) {
-          field.value = "";
-        });
-      } else {
-        budgetSelect.style.display = "none";
-        budgetSelect.selectedIndex = -1;
-        membersPercentageField.style.display = "block";
-      }
-    }
+<script>
+  const budgetCheckbox = document.getElementById("budget_checkbox");
+  const budgetSelect = document.getElementById("expenditure_budget_id");
+  const membersPercentageField = document.getElementById("members_percentage");
+  const percentageFields = membersPercentageField.querySelectorAll("input[type=number]");
 
-    budgetCheckbox.addEventListener("change", toggleSelectVisibility);
-  });
+  function toggleSelectVisibility() {
+    if (budgetCheckbox.checked) {
+      budgetSelect.style.display = "block";
+      membersPercentageField.style.display = "none";
+      percentageFields.forEach(function(field) {
+        field.value = "";
+      });
+    } else {
+      budgetSelect.style.display = "none";
+      budgetSelect.selectedIndex = -1;
+      membersPercentageField.style.display = "block";
+    }
+  }
+
+  budgetCheckbox.addEventListener("change", toggleSelectVisibility);
 </script>
