@@ -15,13 +15,16 @@
     <th></th>
     <th></th>
   </tr>
-  <% @family.expenditures.each do |expenditure| %>
+  <% @family.expenditures.non_budget.each do |expenditure| %>
     <tr>
       <td><%= expenditure.description %></td>
       <td><%= expenditure.amount %></td>
       <td><%= expenditure.date %></td>
       <td><%= link_to 'Edit', edit_expenditure_path(expenditure) %></td>
       <td><%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
+      <% expenditure.expenditure_assignees.each do |assignee| %>
+        <td><%= assignee.user.username %>: <%= assignee.percentage %><td>
+      <% end %>
     </tr>
   <% end %>
 </table>
@@ -35,6 +38,13 @@
   <ul>
     <li>Total Amount: <%= budget.amount %></li>
     <li><%= budget.amount_left %> left to spend.</li>
+    <li>Assignees
+      <ul>
+        <% budget.budget_assignees.each do |assignee| %>
+          <li><%= assignee.user.username %>: <%= assignee.percentage %></li>
+        <% end %>
+      </ul>
+    </li>
   </ul>
   <h3>Expenses</h3>
   <%= link_to 'New Budget Expense', new_expenditure_path(family_id: @family.id, budget_id: budget.id) %>
