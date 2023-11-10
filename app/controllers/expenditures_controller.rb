@@ -29,7 +29,8 @@ class ExpendituresController < ApplicationController
     if @expenditure.save
       redirect_to family_path(@expenditure.family)
     else
-      render :new, status: :unprocessable_entity
+      flash[:alert] = @expenditure.errors
+      redirect_to new_expenditure_path(family_id: @expenditure.family.id)
     end
   end
 
@@ -42,7 +43,8 @@ class ExpendituresController < ApplicationController
       end
       redirect_to family_path(@expenditure.family)
     else
-      render :edit, status: :unprocessable_entity
+      flash[:alert] = @expenditure.errors
+      redirect_to edit_expenditure_path(family_id: @expenditure.family.id)
     end
   end
 
