@@ -11,6 +11,8 @@ class Budget < ApplicationRecord
   validates :name, presence: true
   validates :amount, presence: true
   validates :period, presence: true
+  validate  :presence_of_budget_assignees
+  validate  :assignee_percentage_coverage
 
   def amount_left
     result = amount
@@ -18,5 +20,21 @@ class Budget < ApplicationRecord
       result = result - expenditure.amount
     end
     result
+  end
+
+  private
+
+  def presence_of_budget_assignees
+    unless budget_assignees.any?
+      errors.add(:base, 'At least one budget assignee is required.')
+    end
+  end
+
+  def assignee_percentage_coverage
+    total_percentage = budget_assignees.sum { |assignee| assignee.percentage }
+
+    unless total_percentage == 100
+      errors.add(:base, "The sum of percentages must be 100%. it is #{total_percentage}")
+    end
   end
 end

@@ -22,11 +22,7 @@ class BudgetsController < ApplicationController
   def edit
     @budget = Budget.find(params[:id])
 
-    if @budget.budget_assignees.present?
-      @budget_assignees = @budget.budget_assignees
-    else
-      @budget_assignees = @budget.family.members.map { |member| @budget.budget_assignees.build(user: member) }
-    end
+    @budget_assignees = @budget.family.members.map { |member| @budget.budget_assignees.where(user: member).present? ? @budget.budget_assignees.where(user: member) : @budget.budget_assignees.build(user: member) }
   end
 
   def update
@@ -35,7 +31,8 @@ class BudgetsController < ApplicationController
     if @budget.update(budget_params)
       redirect_to family_path(@budget.family)
     else
-      render :edit, status: :unprocessable_entity
+      flash[:alert] = @budget.errors
+      redirect_to edit_budget_path(family_id: @budget.family.id)
     end
   end
 

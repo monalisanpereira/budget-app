@@ -1,17 +1,17 @@
 <%= form_with model: @budget do |f| %>
   <div>
     <%= f.label :period %>
-    <%= f.select :period, Budget.periods.keys.map { |period| [period.humanize, period] } %>
+    <%= f.select :period, Budget.periods.keys.map { |period| [period.humanize, period] }, required: true %>
   </div>
 
   <div>
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
 
   <div>
     <%= f.label :amount %><br>
-    <%= f.number_field :amount %>
+    <%= f.number_field :amount, required: true %>
   </div>
 
   <div id="members_percentage">
