@@ -1,5 +1,7 @@
 class BudgetsController < ApplicationController
   def new
+    return redirect_to root_path unless params[:family_id].present?
+
     family = Family.find(params[:family_id])
     @budget = Budget.new(family: family)
     @members = family.members
@@ -12,7 +14,8 @@ class BudgetsController < ApplicationController
     if @budget.save
       redirect_to family_path(@budget.family)
     else
-      render :new, status: :unprocessable_entity
+      flash[:alert] = @budget.errors
+      redirect_to new_budget_path(family_id: @budget.family.id)
     end
   end
 
@@ -46,6 +49,6 @@ class BudgetsController < ApplicationController
   
   private
     def budget_params
-      params.require(:budget).permit(:name, :amount, :family_id, budget_assignees_attributes: [:id, :user_id, :percentage])
+      params.require(:budget).permit(:name, :amount, :family_id, :period, budget_assignees_attributes: [:id, :user_id, :percentage])
     end
 end
