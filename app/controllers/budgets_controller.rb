@@ -21,7 +21,6 @@ class BudgetsController < ApplicationController
 
   def edit
     @budget = Budget.find(params[:id])
-
     @budget_assignees = @budget.family.members.map { |member| @budget.budget_assignees.where(user: member).present? ? @budget.budget_assignees.where(user: member) : @budget.budget_assignees.build(user: member) }
   end
 

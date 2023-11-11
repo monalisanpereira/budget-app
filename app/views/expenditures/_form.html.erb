@@ -20,7 +20,7 @@
     <% end %>
   </div>
 
-  <% if params[:budget_id].present? || @expenditure.expenditure_assignees.present? %>
+  <% if params[:budget_id].present? || @expenditure.budget.present? %>
     <input type="checkbox" id="budget_checkbox" checked>Budget Expense</input>
     <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }, params[:budget_id]) %>
     <div id="members_percentage" style='display:none'>

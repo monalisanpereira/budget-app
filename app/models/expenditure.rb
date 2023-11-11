@@ -4,7 +4,7 @@ class Expenditure < ApplicationRecord
   has_many :expenditure_assignees, dependent: :destroy
   has_many :assignees, through: :expenditure_assignees, source: :user
 
-  accepts_nested_attributes_for :expenditure_assignees, reject_if: proc { |attributes| attributes['percentage'].to_i.zero? }
+  accepts_nested_attributes_for :expenditure_assignees, reject_if: :invalid_assignee_data?
   
   scope :non_budget, -> { where(budget: nil) }
 
@@ -27,9 +27,15 @@ class Expenditure < ApplicationRecord
     return if budget.present?
     
     total_percentage = expenditure_assignees.sum { |assignee| assignee.percentage }
-
     unless total_percentage == 100
       errors.add(:base, "The sum of percentages must be 100%. it is #{total_percentage}")
     end
+  end
+
+  def invalid_assignee_data?(attributes)
+    no_percentage = attributes['percentage'].to_i.zero?
+    deleted_assignee = attributes['id'].present? && !ExpenditureAssignee.exists?(id: attributes['id'])
+
+    no_percentage || deleted_assignee
   end
 end
