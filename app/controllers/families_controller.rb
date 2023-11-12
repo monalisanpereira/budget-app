@@ -1,6 +1,6 @@
 class FamiliesController < ApplicationController
-  def index; end
-  
+  before_action :require_user
+
   def show
     @family = Family.find(params[:id])
   end

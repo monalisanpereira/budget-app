@@ -1,4 +1,6 @@
 class ExpendituresController < ApplicationController
+  before_action :require_user
+  
   def new
     family = Family.find(params[:family_id])
     @budgets = family.budgets

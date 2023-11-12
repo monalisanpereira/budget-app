@@ -1,4 +1,6 @@
 class BudgetsController < ApplicationController
+  before_action :require_user
+  
   def new
     return redirect_to root_path unless params[:family_id].present?
 
