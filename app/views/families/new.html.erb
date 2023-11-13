@@ -1,0 +1,8 @@
+<h1>New Family</h1>
+
+<%= form_with model: @family do |f| %>
+  <%= f.label :family_name %>
+  <%= f.text_field :family_name %>
+  <br>
+  <%= f.submit "Create a Family" %>
+<% end %>

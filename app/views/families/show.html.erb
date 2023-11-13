@@ -4,6 +4,7 @@
 <% @family.members.each do |member| %>
   <p><%= member.username %></p>
 <% end %>
+<%= link_to "Delete Family", family_path(@family), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 
 <h2>Last Expenses</h2>
 <%= link_to 'New Expense', new_expenditure_path(family_id: @family.id) %>

@@ -18,13 +18,11 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-
     return redirect_to edit_user_path(current_user) unless @user == current_user
   end
 
   def update
     @user = User.find(params[:id])
-
     return redirect_to root_path unless @user == current_user
 
     if @user.update(user_params)
@@ -35,6 +33,13 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    @user = User.find(params[:id])
+    return redirect_to edit_user_path(current_user) unless @user == current_user
+
+    @user.destroy
+    session[:user_id] = nil
+
+    redirect_to root_path
   end
 
   def profile
@@ -42,7 +47,7 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:username, :email, :password)
-    end
+  def user_params
+    params.require(:user).permit(:username, :email, :password)
+  end
 end

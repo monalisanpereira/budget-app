@@ -14,13 +14,14 @@
     <nav>
       <% if current_user %> 
         <ul> 
-          <li><%= link_to "Profile", 'profile' %></a></li> 
-          <li><%= button_to "Log out", logout_path, method: "delete" %></li> 
+          <li><%= link_to "Profile", profile_path %></li>
+          <li><%= link_to "New Family", new_family_path %></a></li>
+          <li><%= button_to "Log out", logout_path, method: "delete" %></li>
         </ul> 
       <% else %> 
         <ul> 
-          <li><%= link_to "Login", 'login' %></a></li> 
-          <li><%= link_to "Signup", 'signup' %></a></li> 
+          <li><%= link_to "Login", login_path %></a></li>
+          <li><%= link_to "Signup", signup_path %></a></li>
         </ul> 
       <% end %> 
     </nav>
