@@ -14,7 +14,7 @@
     <nav>
       <% if current_user %> 
         <ul> 
-          <li><%= current_user.username %></li> 
+          <li><%= link_to "Profile", 'profile' %></a></li> 
           <li><%= button_to "Log out", logout_path, method: "delete" %></li> 
         </ul> 
       <% else %> 

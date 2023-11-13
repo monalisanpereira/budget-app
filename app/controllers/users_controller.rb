@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  before_action :redirect_user, only: [:new, :create]
+  before_action :require_user, only: [:edit, :update, :destroy, :profile]
+
   def new
     @user = User.new
   end
@@ -11,7 +14,31 @@ class UsersController < ApplicationController
     else 
       redirect_to '/signup' 
     end 
-  end 
+  end
+
+  def edit
+    @user = User.find(params[:id])
+
+    return redirect_to edit_user_path(current_user) unless @user == current_user
+  end
+
+  def update
+    @user = User.find(params[:id])
+
+    return redirect_to root_path unless @user == current_user
+
+    if @user.update(user_params)
+      redirect_to profile_path
+    else 
+      redirect_to edit_user_path(current_user) 
+    end 
+  end
+
+  def destroy
+  end
+
+  def profile
+  end
 
   private
 

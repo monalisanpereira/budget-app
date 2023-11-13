@@ -1,0 +1,12 @@
+<h1>Edit Profile</h1>
+
+<%= form_with model: current_user do |f| %>
+  <%= f.label :username %>
+  <%= f.text_field :username %>
+  <br>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <br>
+  <%= f.submit "Save Profile" %>
+  <%= link_to 'Return', profile_path %>
+<% end %>

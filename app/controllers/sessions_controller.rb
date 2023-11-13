@@ -1,10 +1,13 @@
 class SessionsController < ApplicationController
+  before_action :redirect_user, only: [:new, :create]
+  before_action :require_user, only: [:destroy]
+  
   def new 
   end
 
   def create
-    @user = User.find_by_email(params[:session][:email])
-    if @user && @user.authenticate(params[:session][:password])
+    @user = User.find_by(username: params[:username])
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       redirect_to root_path
     else

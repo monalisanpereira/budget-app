@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
   def require_user 
     redirect_to '/login' unless current_user 
   end
+
+  def redirect_user
+    redirect_to root_path if current_user 
+  end
 end

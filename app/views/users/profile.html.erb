@@ -1,0 +1,6 @@
+<h1>My Profile</h1>
+<ul>
+  <li>Username: <%= current_user.username %></li>
+  <li>Email: <%= current_user.email %></li>
+  <%= link_to 'Edit Profile', edit_user_path(current_user) %></td>
+</ul>
