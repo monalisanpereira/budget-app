@@ -17,7 +17,13 @@
           <li><%= link_to "Profile", profile_path %></li>
           <li><%= link_to "New Family", new_family_path %></a></li>
           <li><%= button_to "Log out", logout_path, method: "delete" %></li>
-        </ul> 
+        </ul>
+        <h3>Families</h3>
+        <ul>
+          <% current_user.families.each do |family| %>
+            <li><%= link_to family.family_name, family_path(family) %>
+          <% end %>
+        </ul>
       <% else %> 
         <ul> 
           <li><%= link_to "Login", login_path %></a></li>

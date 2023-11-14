@@ -6,8 +6,9 @@ class User < ApplicationRecord
   has_many :expenditure_assignees, dependent: :destroy
   has_many :expenditures, through: :expenditure_assignees
 
-  validates :username, presence: true
-  validates :email, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, uniqueness: true
   validates :password_digest, presence: true
 
   has_secure_password

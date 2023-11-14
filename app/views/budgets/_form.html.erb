@@ -18,7 +18,7 @@
     <% @budget_assignees.each do |budget_assignee| %>
       <%= f.fields_for :budget_assignees, budget_assignee do |ba| %>
         <%= ba.hidden_field :user_id %>
-        <%= ba.label :percentage, ba.object.user.username %>
+        <%= ba.label :percentage, ba.object.user.first_name %>
         <%= ba.number_field :percentage %>
       <% end %>
     <% end %>

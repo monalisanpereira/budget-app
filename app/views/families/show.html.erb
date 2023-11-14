@@ -2,7 +2,7 @@
 
 <h2>Members</h2>
 <% @family.members.each do |member| %>
-  <p><%= member.username %></p>
+  <p><%= member.first_name %></p>
 <% end %>
 <%= link_to "Delete Family", family_path(@family), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
 
@@ -24,7 +24,7 @@
       <td><%= link_to 'Edit', edit_expenditure_path(expenditure) %></td>
       <td><%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %></td>
       <% expenditure.expenditure_assignees.each do |assignee| %>
-        <td><%= assignee.user.username %>: <%= assignee.percentage %><td>
+        <td><%= assignee.user.first_name %>: <%= assignee.percentage %><td>
       <% end %>
     </tr>
   <% end %>
@@ -42,7 +42,7 @@
     <li>Assignees
       <ul>
         <% budget.budget_assignees.each do |assignee| %>
-          <li><%= assignee.user.username %>: <%= assignee.percentage %></li>
+          <li><%= assignee.user.first_name %>: <%= assignee.percentage %></li>
         <% end %>
       </ul>
     </li>

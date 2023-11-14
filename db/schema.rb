@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_12_025028) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_13_232506) do
   create_table "budget_assignees", force: :cascade do |t|
     t.integer "budget_id", null: false
     t.integer "user_id", null: false
@@ -67,12 +67,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_12_025028) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "username"
     t.string "password_digest"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["username"], name: "user_username", unique: true
+    t.string "first_name"
+    t.string "last_name"
   end
 
   add_foreign_key "budget_assignees", "budgets"

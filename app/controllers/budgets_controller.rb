@@ -5,12 +5,19 @@ class BudgetsController < ApplicationController
     return redirect_to root_path unless params[:family_id].present?
 
     family = Family.find(params[:family_id])
+
+    return redirect_to root_path unless family.members.include?(current_user)
+
     @budget = Budget.new(family: family)
     @members = family.members
     @budget_assignees = @members.map { |member| @budget.budget_assignees.build(user: member) }
   end
   
   def create
+    family = Family.find(budget_params[:family_id])
+
+    return redirect_to root_path unless family.members.include?(current_user)
+
     @budget = Budget.new(budget_params)
   
     if @budget.save
@@ -23,11 +30,16 @@ class BudgetsController < ApplicationController
 
   def edit
     @budget = Budget.find(params[:id])
+
+    return redirect_to root_path unless @budget.family.members.include?(current_user)
+
     @budget_assignees = @budget.family.members.map { |member| @budget.budget_assignees.where(user: member).present? ? @budget.budget_assignees.where(user: member) : @budget.budget_assignees.build(user: member) }
   end
 
   def update
     @budget = Budget.find(params[:id])
+
+    return redirect_to root_path unless @budget.family.members.include?(current_user)
 
     if @budget.update(budget_params)
       redirect_to family_path(@budget.family)
@@ -40,6 +52,9 @@ class BudgetsController < ApplicationController
   def destroy
     @budget = Budget.find(params[:id])
     family = @budget.family
+
+    return redirect_to root_path unless family.members.include?(current_user)
+    
     @budget.destroy
 
     redirect_to family_path(family), status: :see_other

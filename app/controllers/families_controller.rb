@@ -17,10 +17,15 @@ class FamiliesController < ApplicationController
 
   def show
     @family = Family.find(params[:id])
+
+    return redirect_to root_path unless @family.members.include?(current_user)
   end
 
   def destroy
     @family = Family.find(params[:id])
+
+    return redirect_to root_path unless @family.members.include?(current_user)
+
     @family.destroy
 
     redirect_to root_path

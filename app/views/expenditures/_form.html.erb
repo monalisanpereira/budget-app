@@ -27,7 +27,7 @@
       <% @expenditure_assignees.each do |expenditure_assignee| %>
         <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
           <%= ea.hidden_field :user_id %>
-          <%= ea.label :percentage, ea.object.user.username %>
+          <%= ea.label :percentage, ea.object.user.fisrt_name %>
           <%= ea.number_field :percentage %>
         <% end %>
       <% end %>
@@ -39,7 +39,7 @@
       <% @expenditure_assignees.each do |expenditure_assignee| %>
         <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
           <%= ea.hidden_field :user_id %>
-          <%= ea.label :percentage, ea.object.user.username %>
+          <%= ea.label :percentage, ea.object.user.first_name %>
           <%= ea.number_field :percentage %>
         <% end %>
       <% end %>

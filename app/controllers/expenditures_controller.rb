@@ -2,7 +2,12 @@ class ExpendituresController < ApplicationController
   before_action :require_user
   
   def new
+    return redirect_to root_path unless params[:family_id].present?
+
     family = Family.find(params[:family_id])
+
+    return redirect_to root_path unless family.members.include?(current_user)
+
     @budgets = family.budgets
     @members = family.members
 
@@ -15,13 +20,11 @@ class ExpendituresController < ApplicationController
     @expenditure_assignees = @members.map { |member| @expenditure.expenditure_assignees.build(user: member) }
   end
 
-  def edit
-    @expenditure = Expenditure.find(params[:id])
-    @budgets = @expenditure.family.budgets
-    @expenditure_assignees = @expenditure.family.members.map { |member| @expenditure.expenditure_assignees.where(user: member).present? ? @expenditure.expenditure_assignees.where(user: member) : @expenditure.expenditure_assignees.build(user: member) }
-  end
-
   def create
+    family = Family.find(budget_params[:family_id])
+
+    return redirect_to root_path unless family.members.include?(current_user)
+
     @expenditure = Expenditure.new(expenditure_params)
 
     if @expenditure.save
@@ -32,8 +35,19 @@ class ExpendituresController < ApplicationController
     end
   end
 
+  def edit
+    @expenditure = Expenditure.find(params[:id])
+
+    return redirect_to root_path unless @expenditure.family.members.include?(current_user)
+
+    @budgets = @expenditure.family.budgets
+    @expenditure_assignees = @expenditure.family.members.map { |member| @expenditure.expenditure_assignees.where(user: member).present? ? @expenditure.expenditure_assignees.where(user: member) : @expenditure.expenditure_assignees.build(user: member) }
+  end
+
   def update
     @expenditure = Expenditure.find(params[:id])
+
+    return redirect_to root_path unless @expenditure.family.members.include?(current_user)
 
     begin
       ActiveRecord::Base.transaction do
@@ -67,6 +81,9 @@ class ExpendituresController < ApplicationController
   def destroy
     @expenditure = Expenditure.find(params[:id])
     family = @expenditure.family
+
+    return redirect_to root_path unless family.members.include?(current_user)
+
     @expenditure.destroy
 
     redirect_to family_path(family), status: :see_other
