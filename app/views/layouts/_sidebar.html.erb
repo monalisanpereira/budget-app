@@ -1,0 +1,19 @@
+<div id="layoutSidenav_nav">
+  <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+    <div class="sb-sidenav-menu">
+      <div class="nav">
+        <div class="sb-sidenav-menu-heading">Families</div>
+        <% current_user.families.each do |family| %>
+          <%= link_to family.family_name, family_path(family), class: "nav-link" %>
+        <% end %>
+        <div class="sb-sidenav-menu-heading">Account</div>
+        <%= link_to "Profile", profile_path, class: "nav-link" %>
+        <%= link_to "Settings", edit_user_path(current_user), class: "nav-link" %>
+      </div>
+    </div>
+    <div class="sb-sidenav-footer">
+      <div class="small">Logged in as:</div>
+      Start Bootstrap
+    </div>
+  </nav>
+</div>

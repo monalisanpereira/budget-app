@@ -1,17 +1,61 @@
-<h1>Sign up</h1>
+<main>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="card shadow-lg border-0 rounded-lg mt-5">
+          <div class="card-header">
+            <h3 class="text-center font-weight-light my-4">Create Account</h3>
+          </div>
+          <div class="card-body">
+            <%= form_with model: @user do |f| %>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3 mb-md-0">
+                    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+                    <%= f.label :first_name %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating">
+                    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+                    <%= f.label :last_name %>
+                  </div>
+                </div>
+              </div>
+              <div class="form-floating mb-3">
+                <%= f.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+                <%= f.label :email %>
+              </div>
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <div class="form-floating mb-3 mb-md-0">
+                    <%= f.password_field :password, class: "form-control", placeholder: "Create a password" %>
+                    <%= f.label :password %>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-floating mb-3 mb-md-0">
+                    <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                    <label for="inputPasswordConfirm">Confirm Password</label>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-4 mb-0">
+                <div class="d-grid">
+                  <%= f.submit "Create an Account", class: "btn btn-primary btn-block"%>
+                </div>
+              </div>
+            <% end %>
+          </div>
+          <div class="card-footer text-center py-3">
+            <div class="small">
+              <% link_to "Have an account? Go to login", login_path %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
-<%= form_with model: @user do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-  <br>
-  <%= f.label :last_name %>
-  <%= f.text_field :last_name %>
-  <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password, placeholder: "Password" %>
-  <br>
-  <%= f.submit "Create an Account" %>
-<% end %>
+
