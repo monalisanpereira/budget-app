@@ -17,8 +17,6 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
-    return redirect_to edit_user_path(current_user) unless @user == current_user
   end
 
   def update
@@ -40,9 +38,6 @@ class UsersController < ApplicationController
     session[:user_id] = nil
 
     redirect_to root_path
-  end
-
-  def profile
   end
 
   private

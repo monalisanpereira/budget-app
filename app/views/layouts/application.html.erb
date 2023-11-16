@@ -13,6 +13,9 @@
   </head>
 
   <body class="sb-nav-fixed">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
 
     <%= render "layouts/nav" %>
 
@@ -26,22 +29,22 @@
       <div id="layoutSidenav">
         <%= render "layouts/sidebar" %>
         <div id="layoutSidenav_content">
-
           <%= yield %>
-
+    
           <footer class="py-4 bg-light mt-auto">
             <div class="container-fluid px-4">
               <div class="d-flex align-items-center justify-content-between small">
-                <div class="text-muted">Copyright &copy; Your Website 2023</div>
+                <div class="text-muted">
+                  Copyright &copy; Monalisa Pereira 2023
+                </div>
                 <div>
-                    <a href="#">Privacy Policy</a>
-                    &middot;
-                    <a href="#">Terms &amp; Conditions</a>
+                  <%= link_to "GitHub", "https://github.com/monalisanpereira", target: "_blank" %>
+                  &middot;
+                  <%= link_to "LinkedIn", "https://www.linkedin.com/in/monalisanpereira/", target: "_blank" %>
                 </div>
               </div>
             </div>
           </footer>
-          
         </div>
       </div>
     <% else %>
@@ -55,9 +58,12 @@
             <div class="container-fluid px-4">
               <div class="d-flex align-items-center justify-content-between small">
                 <div class="text-muted">
-                  Copyright &copy; 
-                  <%= link_to "Monalisa Pereira", "https://github.com/monalisanpereira", target: "_blank" %>
-                  2023
+                  Copyright &copy; Monalisa Pereira 2023
+                </div>
+                <div>
+                  <%= link_to "GitHub", "https://github.com/monalisanpereira", target: "_blank" %>
+                  &middot;
+                  <%= link_to "LinkedIn", "https://www.linkedin.com/in/monalisanpereira/", target: "_blank" %>
                 </div>
               </div>
             </div>
@@ -65,14 +71,10 @@
         </div>
       </div>
     <% end %>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
-    <%= javascript_include_tag "scripts" %>
-    <%= javascript_include_tag "chart-area-demo" %>
-    <%= javascript_include_tag "chart-bar-demo" %>
-    <%= javascript_include_tag "chart-pie-demo" %>
-    <%= javascript_include_tag "datatables-simple-demo" %>
   </body>
+  <%= javascript_include_tag "scripts" %>
+  <%= javascript_include_tag "chart-area-demo" %>
+  <%= javascript_include_tag "chart-bar-demo" %>
+  <%= javascript_include_tag "chart-pie-demo" %>
+  <%= javascript_include_tag "datatables-simple-demo" %>
 </html>

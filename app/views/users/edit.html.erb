@@ -1,13 +1,32 @@
-<h1>Edit Profile</h1>
-
-<%= form_with model: current_user do |f| %>
-  <%= f.label :first_name %>
-  <%= f.text_field :first_name %>
-  <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.submit "Save Profile" %>
-  <%= link_to 'Return', profile_path %>
-  <%= link_to "Delete User", user_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-<% end %>
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">My Profile</h1>
+    <ol class="breadcrumb mb-4"></ol>
+    <%= form_with model: current_user do |f| %>
+      <div class="row mb-3">
+        <%= f.label :first_name, class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-5">
+          <%= f.text_field :first_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :last_name, class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-5">
+          <%= f.text_field :last_name, class: "form-control" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <%= f.label :email, class: "col-sm-2 col-form-label" %>
+        <div class="col-sm-5">
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-sm-3 offset-sm-4">
+          <%= f.submit "Save Profile", class: "btn btn-primary" %>
+          <%= button_to "Delete User", user_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</main>

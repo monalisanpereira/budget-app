@@ -1,5 +1,7 @@
 class PagesController < ApplicationController
-  def home
+  before_action :require_user, only: [:home]
 
+  def home
+    
   end
 end
