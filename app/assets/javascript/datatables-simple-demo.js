@@ -4,6 +4,10 @@ window.addEventListener('DOMContentLoaded', event => {
 
     const datatablesSimple = document.getElementById('datatablesSimple');
     if (datatablesSimple) {
-        new simpleDatatables.DataTable(datatablesSimple);
+        new simpleDatatables.DataTable(datatablesSimple, {
+            searchable: false,
+            perPage: 10,
+            perPageSelect: false,
+        });
     }
 });

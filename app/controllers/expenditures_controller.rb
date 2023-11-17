@@ -21,7 +21,7 @@ class ExpendituresController < ApplicationController
   end
 
   def create
-    family = Family.find(budget_params[:family_id])
+    family = Family.find(expenditure_params[:family_id])
 
     return redirect_to root_path unless family.members.include?(current_user)
 

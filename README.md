@@ -3,9 +3,6 @@
 template reference
 https://startbootstrap.com/template/sb-admin
 
-create logo?
-https://zerotomastery.io/resources/
-
 customize family page and additional design
     budget per period
     filter expenses per period?
