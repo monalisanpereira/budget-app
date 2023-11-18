@@ -15,6 +15,22 @@ class FamiliesController < ApplicationController
     end
   end
 
+  def edit
+    @family = Family.find(params[:id])
+    return redirect_to root_path unless @family.members.include?(current_user)
+  end
+
+  def update
+    @family = Family.find(params[:id])
+    return redirect_to root_path unless @family.members.include?(current_user)
+
+    if @family.update(family_params)
+      redirect_to family_path(@family)
+    else 
+      redirect_to edit_family_path(@family) 
+    end 
+  end
+
   def show
     @family = Family.find(params[:id])
 

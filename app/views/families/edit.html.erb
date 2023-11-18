@@ -1,6 +1,6 @@
 <main>
   <div class="container-fluid px-4">
-    <h1 class="mt-4">New Family</h1>
+    <h1 class="mt-4">Edit Family</h1>
     <ol class="breadcrumb mb-4"></ol>
     <%= form_with model: @family do |f| %>
       <div class="row mb-3">
@@ -11,7 +11,7 @@
       </div>
       <div class="row mb-3">
         <div class="col-sm-3 offset-sm-5">
-          <%= f.submit "Create Family", class: "btn btn-primary" %>
+          <%= f.submit "Save Family", class: "btn btn-primary" %>
         </div>
       </div>
     <% end %>
