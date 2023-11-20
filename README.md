@@ -3,9 +3,6 @@
 template reference
 https://startbootstrap.com/template/sb-admin
 
-19/11 - customize design on expenses add/edit and budget add/edit pages
-        finish design on expenses add/edit pages: budget select and user percentage fields, replace expense type checkbox with radio toggles, ref: https://getbootstrap.com/docs/5.1/forms/checks-radios/#radio-toggle-buttons
-
 20/11 - add option to add/exclude new members to the family, edit family name (family config?)
     at this point, every member will be allowed every functionality in the family except add or exclude members, which will be confined to the owner of the family
 

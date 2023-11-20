@@ -1,24 +1,24 @@
 <main>
   <div class="container-fluid px-4">
-    <h1 class="mt-4"><%= title %></h1>
-    <ol class="breadcrumb mb-4"></ol>
+    <h1 class="mt-4 mb-4"><%= title %></h1>
+
     <%= form_with model: @expenditure do |f| %>
 
-      <div class="form-group row mb-3">
+      <div class="row mb-3">
         <%= f.label :date, class: "col-sm-2 col-form-label" %>
         <div class="col-sm-5">
           <%= f.date_field :date, class: "form-control", required: true %>
         </div>
       </div>
 
-      <div class="form-group row mb-3">
+      <div class="row mb-3">
         <%= f.label :description, class: "col-sm-2 col-form-label" %>
         <div class="col-sm-5">
           <%= f.text_field :description, class: "form-control" %>
         </div>
       </div>
 
-      <div class="form-group row mb-3">
+      <div class="row mb-3">
         <%= f.label :amount, class: "col-sm-2 col-form-label" %>
         <div class="col-sm-5">
           <%= f.number_field :amount, class: "form-control", required: true %>
@@ -26,58 +26,82 @@
       </div>
 
       <% if params[:budget_id].present? || @expenditure.budget.present? %>
-        <div class="form-group row mb-3">
+        <div class="row mb-3">
           <div class="col-sm-2">Expense Type</div>
-          <div class="col-sm-7">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="expense_type_checkbox" checked>
-              <label class="form-check-label" for="expense_type_checkbox" id="expense_type_label">
-                Budget
-              </label>
-            </div>
+          <div class="col-sm-5">
+            <input type="radio" class="btn-check" name="options" id="budgetOptionButton" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="budgetOptionButton">Budget</label>
+            
+            <input type="radio" class="btn-check" name="options" id="standaloneOptionButton" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="standaloneOptionButton">Standalone</label>
           </div>
         </div>
 
-        <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }, params[:budget_id]) %>
+        <div class="row mb-3" id="budget-field">
+          <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-5">
+            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select" %>
+          </div>
+        </div>
 
-        <div id="members_percentage" style='display:none'>
-          <% @expenditure_assignees.each do |expenditure_assignee| %>
-            <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
-              <%= ea.hidden_field :user_id %>
-              <%= ea.label :percentage, ea.object.user.fisrt_name %>
-              <%= ea.number_field :percentage %>
+        <div class="row mb-3" id="members-percentage-field" style="display:none">
+          <div class="col-sm-2 col-form-label">Members' Load</div>
+          <div class="col-sm-5">
+            <% @expenditure_assignees.each do |expenditure_assignee| %>
+              <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
+                <div class="row mb-3">
+                  <%= ea.label :percentage, ea.object.user.first_name, class: "col-sm-2 col-form-label" %>
+                  <div class="col-sm-2">
+                    <%= ea.hidden_field :user_id %>
+                    <%= ea.number_field :percentage, class: "form-control" %>
+                  </div>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
 
       <% else %>
-        <div class="form-group row mb-3">
-          <div class="col-sm-2">Expense Type</div>
-          <div class="col-sm-7">
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="expense_type_checkbox">
-              <label class="form-check-label" for="expense_type_checkbox" id="expense_type_label">
-                Standalone
-              </label>
-            </div>
+        <div class="row mb-3">
+          <div class="col-sm-2 col-form-label">Expense Type</div>
+          <div class="col-sm-5">
+            <input type="radio" class="btn-check" name="expense-type" id="budget-option-button" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="budget-option-button">Budget</label>
+            
+            <input type="radio" class="btn-check" name="expense-type" id="standalone-option-button" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="standalone-option-button">Standalone</label>
           </div>
         </div>
 
-        <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, style: 'display: none' %>
-        <div id="members_percentage">
-          <% @expenditure_assignees.each do |expenditure_assignee| %>
-            <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
-              <%= ea.hidden_field :user_id %>
-              <%= ea.label :percentage, ea.object.user.first_name %>
-              <%= ea.number_field :percentage %>
-            <% end %>
-          <% end %>
+        <div class="row mb-3" id="budget-field" style="display:none">
+          <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
+          <div class="col-sm-5">
+            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select" %>
+          </div>
         </div>
+
+        <div class="row mb-3" id="members-percentage-field">
+          <div class="col-sm-2 col-form-label">Members' Load</div>
+          <div class="col-sm-7">
+            <% @expenditure_assignees.each do |expenditure_assignee| %>
+              <%= f.fields_for :expenditure_assignees, expenditure_assignee do |ea| %>
+                <div class="row mb-3">
+                  <%= ea.label :percentage, ea.object.user.first_name, class: "col-sm-2 col-form-label" %>
+                  <div class="col-sm-2">
+                    <%= ea.hidden_field :user_id %>
+                    <%= ea.number_field :percentage, class: "form-control" %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+
       <% end %>
 
       <%= f.hidden_field :family_id %>
 
-      <div class="form-group row mb-3">
+      <div class="row mb-3">
         <div class="col-sm-3 offset-sm-5">
           <%= f.submit submit_text, class: "btn btn-primary" %>
         </div>
@@ -87,31 +111,31 @@
 </main>
 
 <script>
-  var expenseTypeCheckbox = document.getElementById("expense_type_checkbox");
-  var expenseTypeLabel = document.getElementById("expense_type_label");
-  var budgetSelect = document.getElementById("expenditure_budget_id");
-  var membersPercentageField = document.getElementById("members_percentage");
+  var budgetOptionButton = document.getElementById("budget-option-button");
+  var standaloneOptionButton = document.getElementById("standalone-option-button");
+  var budgetSelectField = document.getElementById("budget-field");
+  var budgetField = document.getElementById("expenditure_budget_id");
+  var membersPercentageField = document.getElementById("members-percentage-field");
   var percentageFields = membersPercentageField.querySelectorAll("input[type=number]");
 
-  function toggleSelectVisibility() {
-    if (expenseTypeCheckbox.checked) {
-      // Modify form
-      budgetSelect.style.display = "block";
-      membersPercentageField.style.display = "none";
-      expenseTypeLabel.textContent = "Budget";
-      // Reset values
-      percentageFields.forEach(function(field) {
-        field.value = "";
-      });
-    } else {
-      // Modify form
-      budgetSelect.style.display = "none";
-      membersPercentageField.style.display = "block";
-      expenseTypeLabel.textContent = "Standalone";
-      // Reset values
-      budgetSelect.selectedIndex = -1;
-    }
+  function selectBudget() {
+    // Modify form
+    budgetSelectField.style.display = "flex";
+    membersPercentageField.style.display = "none";
+    // Reset values
+    percentageFields.forEach(function(field) {
+      field.value = "";
+    });
   }
 
-  expenseTypeCheckbox.addEventListener("change", toggleSelectVisibility);
+  function selectStandalone() {
+    // Modify form
+    budgetSelectField.style.display = "none";
+    membersPercentageField.style.display = "flex";
+    // Reset values
+    budgetField.selectedIndex = 0;
+  }
+
+  budgetOptionButton.addEventListener("click", selectBudget);
+  standaloneOptionButton.addEventListener("click", selectStandalone);
 </script>
