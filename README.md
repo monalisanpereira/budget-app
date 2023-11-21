@@ -3,9 +3,6 @@
 template reference
 https://startbootstrap.com/template/sb-admin
 
-20/11 - add option to add/exclude new members to the family, edit family name (family config?)
-    at this point, every member will be allowed every functionality in the family except add or exclude members, which will be confined to the owner of the family
-
 21-23/11 - customize family page and additional design
     budget per period
     filter expenses per period?

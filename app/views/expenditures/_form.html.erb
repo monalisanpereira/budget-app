@@ -29,18 +29,18 @@
         <div class="row mb-3">
           <div class="col-sm-2">Expense Type</div>
           <div class="col-sm-5">
+            <input type="radio" class="btn-check" name="options" id="generalOptionButton" autocomplete="off">
+            <label class="btn btn-outline-secondary" for="generalOptionButton">General</label>
+
             <input type="radio" class="btn-check" name="options" id="budgetOptionButton" autocomplete="off" checked>
             <label class="btn btn-outline-secondary" for="budgetOptionButton">Budget</label>
-            
-            <input type="radio" class="btn-check" name="options" id="standaloneOptionButton" autocomplete="off">
-            <label class="btn btn-outline-secondary" for="standaloneOptionButton">Standalone</label>
           </div>
         </div>
 
         <div class="row mb-3" id="budget-field">
           <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
           <div class="col-sm-5">
-            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select" %>
+            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
           </div>
         </div>
 
@@ -65,18 +65,18 @@
         <div class="row mb-3">
           <div class="col-sm-2 col-form-label">Expense Type</div>
           <div class="col-sm-5">
+            <input type="radio" class="btn-check" name="expense-type" id="general-option-button" autocomplete="off" checked>
+            <label class="btn btn-outline-secondary" for="general-option-button">General</label>
+
             <input type="radio" class="btn-check" name="expense-type" id="budget-option-button" autocomplete="off">
             <label class="btn btn-outline-secondary" for="budget-option-button">Budget</label>
-            
-            <input type="radio" class="btn-check" name="expense-type" id="standalone-option-button" autocomplete="off" checked>
-            <label class="btn btn-outline-secondary" for="standalone-option-button">Standalone</label>
           </div>
         </div>
 
         <div class="row mb-3" id="budget-field" style="display:none">
           <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
           <div class="col-sm-5">
-            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select" %>
+            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
           </div>
         </div>
 
@@ -112,7 +112,7 @@
 
 <script>
   var budgetOptionButton = document.getElementById("budget-option-button");
-  var standaloneOptionButton = document.getElementById("standalone-option-button");
+  var generalOptionButton = document.getElementById("general-option-button");
   var budgetSelectField = document.getElementById("budget-field");
   var budgetField = document.getElementById("expenditure_budget_id");
   var membersPercentageField = document.getElementById("members-percentage-field");
@@ -128,7 +128,7 @@
     });
   }
 
-  function selectStandalone() {
+  function selectGeneral() {
     // Modify form
     budgetSelectField.style.display = "none";
     membersPercentageField.style.display = "flex";
@@ -137,5 +137,5 @@
   }
 
   budgetOptionButton.addEventListener("click", selectBudget);
-  standaloneOptionButton.addEventListener("click", selectStandalone);
+  generalOptionButton.addEventListener("click", selectGeneral);
 </script>

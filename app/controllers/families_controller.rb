@@ -47,6 +47,12 @@ class FamiliesController < ApplicationController
     redirect_to root_path
   end
 
+  def manage_members
+    @family = Family.find(params[:id])
+    return redirect_to root_path unless @family.members.include?(current_user) && current_user.owner?(@family)
+    @family_member = @family.family_members.build
+  end
+
   private
 
   def family_params

@@ -1,0 +1,34 @@
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">Manage Members</h1>
+    <ol class="breadcrumb mb-4"><%= @family.family_name %></ol>
+
+    <h3 class="mt-4">New Member</h3>
+    <%= form_with model: @family_member do |f| %>
+      <div class="row mb-3">
+        <div class="col-sm-3">
+            <%= f.text_field :user_email, class: "form-control", placeholder: "Email" %>
+        </div>
+        <div class="col-sm-2">
+            <%= f.hidden_field :family_id %>
+            <%= f.submit "Add Member", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+
+    <h3 class="mt-4">Manage Members</h3>
+    <% @family.members.each do |member| %>
+      <div class="row mb-3">
+        <div class="col-sm-2 col-form-label">
+          <%= member.full_name %>
+        </div>
+        <div class="col-sm-5">
+          <% unless member.owner?(@family) %>
+            <%= link_to "Exclude Member", family_member_path(FamilyMember.where(user: member, family: @family).first), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+  </div>
+</main>

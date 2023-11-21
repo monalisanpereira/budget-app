@@ -16,4 +16,8 @@ class User < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  def owner?(family)
+    FamilyMember.where(family: family, user: self).first.owner?
+  end 
 end

@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   post   'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
   resources :users, only: [:create, :edit, :update, :destroy]
-  resources :families
+  resources :families do
+    member do
+      get 'manage-members', to: 'families#manage_members'
+    end
+  end
+  resources :family_members
   resources :budgets
   resources :expenditures
 end

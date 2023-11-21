@@ -24,7 +24,7 @@
       <div class="row mb-3">
         <div class="col-sm-3 offset-sm-4">
           <%= f.submit "Save Profile", class: "btn btn-primary" %>
-          <%= button_to "Delete User", user_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
+          <%= link_to "Delete User", user_path(current_user), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
         </div>
       </div>
     <% end %>
