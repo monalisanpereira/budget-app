@@ -6,7 +6,7 @@ class Budget < ApplicationRecord
 
   accepts_nested_attributes_for :budget_assignees, reject_if: proc { |attributes| attributes['percentage'].to_i.zero? }
 
-  enum :period, [ :month, :week, :day, :two_weeks, :two_months, :three_months, :six_months, :year ]
+  enum :period, [ :monthly, :weekly, :daily, :yearly ]
 
   validates :name, presence: true
   validates :amount, presence: true
@@ -14,12 +14,46 @@ class Budget < ApplicationRecord
   validate  :presence_of_budget_assignees
   validate  :assignee_percentage_coverage
 
-  def amount_left
-    result = amount
-    self.expenditures.where(date: Date.current.beginning_of_month..Date.current.end_of_month).each do |expenditure|
-      result = result - expenditure.amount
+  def current_period_range
+    if self.monthly?
+      beginning_of_period = Date.current.beginning_of_month
+      end_of_period = Date.current.end_of_month
+    elsif self.weekly?
+      beginning_of_period = Date.current.beginning_of_week
+      end_of_period = Date.current.end_of_week
+    elsif self.daily?
+      beginning_of_period = Date.current.beginning_of_day
+      end_of_period = Date.current.end_of_day
+    elsif self.yearly?
+      beginning_of_period = Date.current.beginning_of_year
+      end_of_period = Date.current.end_of_year
     end
-    result
+
+    return beginning_of_period..end_of_period
+  end
+
+  def current_period_message
+    if self.monthly?
+      "this month"
+    elsif self.weekly?
+      "this week"
+    elsif self.daily?
+      "today"
+    elsif self.yearly?
+      "this year"
+    end
+  end
+
+  def total_spent
+    total = 0
+    self.expenditures.where(date: self.current_period_range).each do |expenditure|
+      total += expenditure.amount
+    end
+    total.to_i
+  end
+
+  def amount_left
+    (self.amount - self.total_spent).to_i
   end
 
   private

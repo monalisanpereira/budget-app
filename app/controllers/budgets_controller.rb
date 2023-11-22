@@ -59,6 +59,10 @@ class BudgetsController < ApplicationController
 
     redirect_to family_path(family), status: :see_other
   end
+
+  def show
+    @budget = Budget.find(params[:id])
+  end
   
   private
     def budget_params

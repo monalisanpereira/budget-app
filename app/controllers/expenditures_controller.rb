@@ -1,5 +1,10 @@
 class ExpendituresController < ApplicationController
   before_action :require_user
+
+  def index
+    family = Family.find(params[:family_id])
+    @expenditures = family.expenditures
+  end
   
   def new
     return redirect_to root_path unless params[:family_id].present?

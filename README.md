@@ -3,7 +3,7 @@
 template reference
 https://startbootstrap.com/template/sb-admin
 
-21-23/11 - customize family page and additional design
+21-23/11 - customize family page and additional design: budget details page + edit/delete opt, expenses index page
     budget per period
     filter expenses per period?
 
@@ -20,3 +20,7 @@ https://startbootstrap.com/template/sb-admin
 29/11 - make video etc
 
 30/11 - submission deadline
+
+additional ideas
+
+make it possible to choose different currencies

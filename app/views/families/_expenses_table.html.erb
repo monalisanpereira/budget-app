@@ -1,0 +1,21 @@
+<thead>
+  <tr>
+    <th>Date</th>
+    <th>Description</th>
+    <th>Amount</th>
+    <th data-sortable="false"></th>
+  </tr>
+</thead>
+<tbody>
+  <% expenditures.each do |expenditure| %>
+    <tr>
+      <td><%= expenditure.date %></td>
+      <td><%= expenditure.description %></td>
+      <td><%= expenditure.amount %></td>
+      <td>
+        <%= link_to "Edit", edit_expenditure_path(expenditure), class: "btn btn-primary btn-sm" %>
+        <%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+      </td>
+    </tr>
+  <% end %>
+</tbody>
