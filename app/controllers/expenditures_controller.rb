@@ -2,8 +2,7 @@ class ExpendituresController < ApplicationController
   before_action :require_user
 
   def index
-    family = Family.find(params[:family_id])
-    @expenditures = family.expenditures
+    @family = Family.find(params[:family_id])
   end
   
   def new

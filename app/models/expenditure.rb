@@ -1,4 +1,6 @@
 class Expenditure < ApplicationRecord
+  include MoneyConvertible
+
   belongs_to :family
   belongs_to :budget, optional: true
   has_many :expenditure_assignees, dependent: :destroy
@@ -12,6 +14,10 @@ class Expenditure < ApplicationRecord
   validates :date, presence: true
   validate  :presence_of_assignees_or_budget
   validate  :assignee_percentage_coverage
+
+  def amount_as_currency
+    Money.from_amount(self.amount, "JPY")
+  end
 
   private
 

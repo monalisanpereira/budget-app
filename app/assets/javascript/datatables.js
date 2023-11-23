@@ -1,9 +1,10 @@
 window.addEventListener('DOMContentLoaded', event => {
   // Simple-DataTables
-  // https://github.com/fiduswriter/Simple-DataTables/wiki
+  // https://fiduswriter.github.io/simple-datatables/documentation/
   
   const datatables = document.querySelectorAll('.datatable');
   const expensesTable = document.getElementById('expensesTable');
+  const detailedExpensesTable = document.getElementById('detailedExpensesTable');
   
   if (datatables) {
     datatables.forEach(
@@ -21,6 +22,13 @@ window.addEventListener('DOMContentLoaded', event => {
     new simpleDatatables.DataTable(expensesTable, {
       searchable: false,
       perPage: 10,
+      perPageSelect: false,
+    });
+  }
+
+  if (detailedExpensesTable) {
+    new simpleDatatables.DataTable(detailedExpensesTable, {
+      perPage: 20,
       perPageSelect: false,
     });
   }

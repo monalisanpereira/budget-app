@@ -2,7 +2,8 @@
   <tr>
     <th>Date</th>
     <th>Description</th>
-    <th>Amount</th>
+    <th>Total Amount</th>
+    <th>Amount Per Assignee</th>
     <th data-sortable="false"></th>
   </tr>
 </thead>
@@ -12,6 +13,11 @@
       <td data-order="<%= expenditure.date.to_fs(:number) %>"><%= expenditure.date.to_fs(:long) %></td>
       <td><%= expenditure.description %></td>
       <td><%= expenditure.amount_as_currency.format %></td>
+      <td>
+        <% expenditure.expenditure_assignees.each do |assignee| %>
+          <%= assignee.user.first_name %>: <%= assignee.beared_cost.format %><br>
+        <% end %>
+      </td>
       <td>
         <%= link_to "Edit", edit_expenditure_path(expenditure), class: "btn btn-primary btn-sm" %>
         <%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>

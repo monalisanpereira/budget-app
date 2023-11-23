@@ -3,7 +3,7 @@
 template reference
 https://startbootstrap.com/template/sb-admin
 
-21-23/11 - customize family page and additional design: budget details page + edit/delete opt, expenses index page
+21-23/11 - customize family page and additional design: budget details page + edit/delete opt
     budget per period
     filter expenses per period?
 
@@ -11,11 +11,7 @@ https://startbootstrap.com/template/sb-admin
 
 25/11 - add guide page
 
-26/11 - confirm account via email
-
-27/11 - change password option
-
-28/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
+fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
 
 29/11 - make video etc
 
@@ -23,4 +19,6 @@ https://startbootstrap.com/template/sb-admin
 
 additional ideas
 
+confirm account via email
+change password option
 make it possible to choose different currencies

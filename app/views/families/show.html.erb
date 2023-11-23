@@ -65,7 +65,7 @@
               <%= link_to "Details >", budget_path(budget), class: "float-end" %>
             </div>
             <div class="card-body">
-              <b>¥<%= budget.total_spent %></b> spent out of <b>¥<%= budget.amount.to_i %></b> <%= budget.current_period_message %>. <b>¥<%= budget.amount_left %></b> left.
+              <b><%= budget.total_spent.format %></b> spent out of <b><%= budget.amount_as_currency.format %></b> <%= budget.current_period_message %>. <b><%= budget.amount_left.format %></b> left.
               <table class="datatable">
                 <%= render "expenses_table", expenditures: budget.expenditures %>
               </table>

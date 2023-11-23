@@ -1,4 +1,6 @@
 class Budget < ApplicationRecord
+  include MoneyConvertible
+
   belongs_to :family
   has_many :expenditures
   has_many :budget_assignees, dependent: :destroy
@@ -45,15 +47,15 @@ class Budget < ApplicationRecord
   end
 
   def total_spent
-    total = 0
+    total = Money.from_amount(0, "JPY")
     self.expenditures.where(date: self.current_period_range).each do |expenditure|
-      total += expenditure.amount
+      total += expenditure.amount_as_currency
     end
-    total.to_i
+    total
   end
 
   def amount_left
-    (self.amount - self.total_spent).to_i
+    self.amount_as_currency - self.total_spent
   end
 
   private
