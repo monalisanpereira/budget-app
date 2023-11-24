@@ -5,7 +5,9 @@
       <h1 class="d-inline align-middle"><%= @family.family_name %></h1>
       <% if current_user.owner?(@family) %>
         <h4 class="d-inline align-middle dropdown">
-          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i></a>
+          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i>
+          </a>
           <ul class="dropdown-menu">
             <li><%= link_to "Edit Family", edit_family_path(@family), class: "dropdown-item" %></li>
             <li><%= link_to "Manage Members", manage_members_family_path(@family), class: "dropdown-item" %></li>

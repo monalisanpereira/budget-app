@@ -6,20 +6,22 @@ class ExpendituresController < ApplicationController
   end
   
   def new
-    return redirect_to root_path unless params[:family_id].present?
-
-    family = Family.find(params[:family_id])
+    if params[:family_id].present?
+      family = Family.find(params[:family_id])
+    elsif params[:budget_id].present?
+      budget = Budget.find(params[:budget_id])
+      family = budget.family
+    else
+      return redirect_to root_path
+    end
 
     return redirect_to root_path unless family.members.include?(current_user)
 
     @budgets = family.budgets
     @members = family.members
 
-    if params[:budget_id].present?
-      @expenditure = Expenditure.new(family: family, budget: Budget.find(params[:budget_id]))
-    else
-      @expenditure = Expenditure.new(family: family)
-    end
+    @expenditure = Expenditure.new(family: family)
+    @expenditure.budget = budget if params[:budget_id].present?
 
     @expenditure_assignees = @members.map { |member| @expenditure.expenditure_assignees.build(user: member) }
   end
