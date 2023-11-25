@@ -30,7 +30,10 @@
             Details
           </div>
           <div class="card-body">
-            budget info here
+              <%= render "period_select", budget: @budget %>
+            <p>
+              <b><%= @budget.total_spent(@period_range).format %></b> spent out of <b><%= @budget.amount_as_currency.format %></b> <%= @budget.current_period_message %>. <b><%= @budget.amount_left(@period_range).format %></b> left.
+            </p>
           </div>
         </div>
       </div>
@@ -47,7 +50,7 @@
           </div>
           <div class="card-body">
             <table id="detailedExpensesTable">
-              <%= render "expenses_table", expenditures: @budget.expenditures %>
+              <%= render "expenses_table", expenditures: @expenditures %>
             </table>
           </div>
         </div>

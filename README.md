@@ -5,19 +5,17 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-24-25/11 - add budget details page + edit/delete opt
-            make it possible to choose different currencies on family new/edit
-            filter expenses per period
-            add return button to new/edit pages?
+26/11 - add details to budget show page: progress bar, assignees and their loads
+        https://getbootstrap.com/docs/5.2/components/progress/#how-it-works
 
-bug: selects in edit do not come with the current option selected
+27/11 - check authorization for all methods, add proper error messages
 
-26/11 - add proper error messages when the user does not exist or the password is wrong etc
-
-27/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
+28/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
 
 fix breadcrumbs
 make it possible to edit users' roles
+make it possible to choose different currencies on family new/edit
+add return button to new/edit pages
 
 29/11 - make video etc
 

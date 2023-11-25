@@ -1,0 +1,27 @@
+<%= form_with url: budget_path(@budget), method: :get, id: 'period-form' do |f| %>
+  <div class="row mb-3">
+    <%= f.label :period, "Select period:", class: "col col-form-label" %>
+    <div class="col">
+      <% if @budget.daily? %>
+        <%= f.date_field :period, value: @period, class: "form-control", id: 'period-field' %>
+      <% elsif @budget.weekly? %>
+        <%= f.week_field :period, value: @period, class: "form-control", id: 'period-field' %>
+      <% elsif @budget.monthly? %>
+        <%= f.month_field :period, value: @period, class: "form-control", id: 'period-field' %>
+      <% elsif @budget.yearly? %>
+        <%= select_year @period.to_i, { start_year: 1990, end_year: Date.current.year, prefix: "period", discard_type: true }, class: "form-select", id: 'period-field' %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var periodField = document.getElementById('period-field');
+    var periodForm = document.getElementById('period-form');
+
+    periodField.addEventListener('change', function() {
+      periodForm.submit();
+    });
+  });
+</script>

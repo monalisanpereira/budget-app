@@ -7,7 +7,7 @@
       <div class="row mb-3">
         <%= f.label :period, class: "col-sm-2 col-form-label" %>
         <div class="col-sm-5">
-          <%= f.select :period, options_for_select(Budget.periods.keys.map { |period| [period.humanize, period] }), { include_blank: 'Select a period' }, class: "form-select", required: true %>
+          <%= f.select :period, Budget.periods.keys.map { |period| [period.humanize, period] }, { include_blank: 'Select a period' }, class: "form-select", required: true %>
         </div>
       </div>
 

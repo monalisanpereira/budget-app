@@ -16,19 +16,32 @@ class Budget < ApplicationRecord
   validate  :presence_of_budget_assignees
   validate  :assignee_percentage_coverage
 
-  def current_period_range
+  def current_period
     if self.monthly?
-      beginning_of_period = Date.current.beginning_of_month
-      end_of_period = Date.current.end_of_month
+      Date.current.strftime('%Y-%m')
     elsif self.weekly?
-      beginning_of_period = Date.current.beginning_of_week
-      end_of_period = Date.current.end_of_week
+      Date.current.strftime('%Y-W%W')
     elsif self.daily?
-      beginning_of_period = Date.current.beginning_of_day
-      end_of_period = Date.current.end_of_day
+      Date.current.strftime('%Y-%m-%d')
     elsif self.yearly?
-      beginning_of_period = Date.current.beginning_of_year
-      end_of_period = Date.current.end_of_year
+      Date.current.strftime('%Y')
+    end
+  end
+
+  def period_range(period)
+    if self.monthly?
+      beginning_of_period = Date.parse("#{period}-01").beginning_of_month
+      end_of_period = Date.parse("#{period}-01").end_of_month
+    elsif self.weekly?
+      Date.strptime(period, '%Y-W%W')
+      beginning_of_period = Date.strptime(period, '%Y-W%W').beginning_of_week
+      end_of_period = Date.strptime(period, '%Y-W%W').end_of_week
+    elsif self.daily?
+      beginning_of_period = Date.parse(period).beginning_of_day
+      end_of_period = Date.parse(period).end_of_day
+    elsif self.yearly?
+      beginning_of_period = Date.parse("#{period}-01-01")
+      end_of_period = Date.parse("#{period}-12-31")
     end
 
     return beginning_of_period..end_of_period
@@ -46,16 +59,16 @@ class Budget < ApplicationRecord
     end
   end
 
-  def total_spent
+  def total_spent(period_range = self.period_range(self.current_period))
     total = Money.from_amount(0, "JPY")
-    self.expenditures.where(date: self.current_period_range).each do |expenditure|
+    self.expenditures.in_period(period_range).each do |expenditure|
       total += expenditure.amount_as_currency
     end
     total
   end
 
-  def amount_left
-    self.amount_as_currency - self.total_spent
+  def amount_left(period_range = self.period_range(self.current_period))
+    self.amount_as_currency - self.total_spent(period_range)
   end
 
   private

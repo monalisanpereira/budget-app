@@ -9,6 +9,7 @@ class Expenditure < ApplicationRecord
   accepts_nested_attributes_for :expenditure_assignees, reject_if: :invalid_assignee_data?
   
   scope :non_budget, -> { where(budget: nil) }
+  scope :in_period, ->(period_range) { where(date: period_range) }
 
   validates :amount, presence: true
   validates :date, presence: true

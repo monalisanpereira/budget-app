@@ -62,6 +62,9 @@ class BudgetsController < ApplicationController
 
   def show
     @budget = Budget.find(params[:id])
+    @period = params[:period] || @budget.current_period
+    @period_range = @budget.period_range(@period)
+    @expenditures = @budget.expenditures.in_period(@period_range)
   end
   
   private

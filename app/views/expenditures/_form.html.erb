@@ -40,7 +40,7 @@
         <div class="row mb-3" id="budget-field">
           <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
           <div class="col-sm-5">
-            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
+            <%= f.select :budget_id, @budgets.map { |budget| [budget.name, budget.id] }, { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
           </div>
         </div>
 
@@ -76,7 +76,7 @@
         <div class="row mb-3" id="budget-field" style="display:none">
           <%= f.label :budget_id, class: "col-sm-2 col-form-label" %>
           <div class="col-sm-5">
-            <%= f.select :budget_id, options_for_select(@budgets.map { |budget| [budget.name, budget.id] }), { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
+            <%= f.select :budget_id, @budgets.map { |budget| [budget.name, budget.id] }, { include_blank: 'Select a budget' }, class: "form-select mb-3" %>
           </div>
         </div>
 
