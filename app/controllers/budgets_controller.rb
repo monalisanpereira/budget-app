@@ -2,11 +2,12 @@ class BudgetsController < ApplicationController
   before_action :require_user
   
   def new
-    return redirect_to root_path unless params[:family_id].present?
+    return redirect_to root_path, alert: "There was an error creating your budget." unless params[:family_id].present?
 
     family = Family.find(params[:family_id])
 
-    return redirect_to root_path unless family.members.include?(current_user)
+    return redirect_to root_path, alert: "You do not have permisson for this action." unless family.members.include?(current_user)
+    return redirect_to family_path(family), alert: "You do not have permisson for this action." unless family.family_members.above_editor.include?(current_user)
 
     @budget = Budget.new(family: family)
     @members = family.members
@@ -14,17 +15,19 @@ class BudgetsController < ApplicationController
   end
   
   def create
+    return redirect_to root_path, alert: "There was an error creating your budget." unless params[:family_id].present?
+
     family = Family.find(budget_params[:family_id])
 
-    return redirect_to root_path unless family.members.include?(current_user)
+    return redirect_to root_path, alert: "You do not have permisson for this action." unless family.members.include?(current_user)
+    return redirect_to family_path(family), alert: "You do not have permisson for this action." unless family.family_members.above_editor.include?(current_user)
 
     @budget = Budget.new(budget_params)
   
     if @budget.save
-      redirect_to family_path(@budget.family)
+      redirect_to budget_path(@budget)
     else
-      flash[:alert] = @budget.errors
-      redirect_to new_budget_path(family_id: @budget.family.id)
+      redirect_to new_budget_path(family_id: @budget.family.id), alert: "There was an error creating your budget."
     end
   end
 

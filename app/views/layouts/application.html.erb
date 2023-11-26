@@ -19,12 +19,6 @@
 
     <%= render "layouts/nav" %>
 
-    <% flash.each do |key, message| %>
-      <div class="alert <%= key %>">
-        <%= message %>
-      </div>
-    <% end %>
-
     <% if current_user %>
       <div id="layoutSidenav">
         <%= render "layouts/sidebar" %>

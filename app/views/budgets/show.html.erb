@@ -1,5 +1,12 @@
 <main>
   <div class="container-fluid px-4">
+    
+    <% flash.each do |key, value| %>
+      <div class="alert alert-danger alert-dismissible <%= key %>">
+        <%= value %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    <% end %>
 
     <div class="mt-4">
       <h1 class="d-inline align-middle"><%= @budget.name %></h1>
@@ -34,6 +41,14 @@
             <p>
               <b><%= @budget.total_spent(@period_range).format %></b> spent out of <b><%= @budget.amount_as_currency.format %></b> <%= @budget.current_period_message %>. <b><%= @budget.amount_left(@period_range).format %></b> left.
             </p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: <%= @budget.total_percentage_spent(@period_range) %>%" aria-valuenow="<%= @budget.total_percentage_spent(@period_range) %>" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <% @budget.budget_assignees.each do |assignee| %>
+              <div class="mt-4">
+                <%= assignee.user.first_name %>: <%= assignee.individual(@budget.total_spent(@period_range)).format %> out of <%= assignee.individual(@budget.amount_as_currency).format %>
+              </div>
+            <% end %>
           </div>
         </div>
       </div>

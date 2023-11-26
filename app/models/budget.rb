@@ -71,6 +71,10 @@ class Budget < ApplicationRecord
     self.amount_as_currency - self.total_spent(period_range)
   end
 
+  def total_percentage_spent(period_range = self.period_range(self.current_period))
+    (self.total_spent(period_range).to_d / self.amount * 100).to_i
+  end
+
   private
 
   def presence_of_budget_assignees
