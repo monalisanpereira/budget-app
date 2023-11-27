@@ -5,9 +5,9 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-27/11 - CONTROLLER: authorization, error/success alerts, redirect path
+27/11 - CONTROLLER: authorization, error alerts, redirect path
         VIEW: hide buttons and options if not authorized
-        bug: flash messages not working
+        fix views to add error messages on general layout
 
 28/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
 
@@ -25,3 +25,7 @@ add return button to new/edit pages
 confirm account via email
 change password option
 archive budget
+add support to different languages
+add testing
+add logical deletion (paranoia gem)
+introduce a more sophisticated auth system (devise gem)

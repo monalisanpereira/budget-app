@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_014005) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_000904) do
   create_table "budget_assignees", force: :cascade do |t|
     t.integer "budget_id", null: false
     t.integer "user_id", null: false
@@ -61,7 +61,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_014005) do
   create_table "family_members", force: :cascade do |t|
     t.integer "family_id", null: false
     t.integer "user_id", null: false
-    t.boolean "is_owner", default: false, null: false
     t.integer "role"
     t.index ["family_id"], name: "index_family_members_on_family_id"
     t.index ["user_id"], name: "index_family_members_on_user_id"

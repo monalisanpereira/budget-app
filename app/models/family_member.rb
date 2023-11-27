@@ -4,7 +4,7 @@ class FamilyMember < ApplicationRecord
 
     enum :role, [ :owner, :admin, :editor, :viewer ]
 
-    scope :owner, -> { where(role: :owner) }
+    scope :owner, -> { where(role: :owner).first }
     scope :admins, -> { where(role: :admin) }
     scope :editors, -> { where(role: :editor) }
     scope :viewers, -> { where(role: :viewer) }
