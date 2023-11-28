@@ -49,7 +49,7 @@ class BudgetsController < ApplicationController
     if @budget.update(budget_params)
       redirect_to budget_path(@budget)
     else
-      redirect_to new_budget_path(family_id: @budget.family.id), alert:  t('alerts.errors.budget_update')
+      redirect_to edit_budget_path(@budget), alert:  t('alerts.errors.budget_update')
     end
   end
 

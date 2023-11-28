@@ -35,4 +35,6 @@ en:
       no_permission: "You do not have permisson for this action."
       budget_create: "There was an error creating your budget."
       budget_update: "There was an error updating your budget."
+      expense_create: "There was an error creating your expense."
+      expense_update: "There was an error updating your expense."
 
