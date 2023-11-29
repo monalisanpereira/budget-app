@@ -5,8 +5,8 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-29/11 - CONTROLLER: authorization, error alerts, redirect path (budgets ok, expenditures ok)
-        VIEW: hide buttons and options if not authorized
+29/11 - CONTROLLER: authorization, error alerts, redirect path (budgets ok, expenditures ok, families ok)
+        VIEW: hide buttons and options if not authorized (ok?)
         fix views to add error messages on general layout
 
 29/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?

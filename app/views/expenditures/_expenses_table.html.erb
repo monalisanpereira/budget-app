@@ -4,7 +4,9 @@
     <th>Description</th>
     <th>Total Amount</th>
     <th>Amount Per Assignee</th>
-    <th data-sortable="false"></th>
+    <% if @family.member_is_above_editor?(current_user) %>
+      <th data-sortable="false"></th>
+    <% end %>
   </tr>
 </thead>
 <tbody>
@@ -18,10 +20,12 @@
           <%= assignee.user.first_name %>: <%= assignee.beared_cost.format %><br>
         <% end %>
       </td>
-      <td>
-        <%= link_to "Edit", edit_expenditure_path(expenditure), class: "btn btn-primary btn-sm" %>
-        <%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
-      </td>
+      <% if @family.member_is_above_editor?(current_user) %>
+        <td>
+          <%= link_to "Edit", edit_expenditure_path(expenditure), class: "btn btn-primary btn-sm" %>
+          <%= link_to "Delete", expenditure_path(expenditure), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </tbody>

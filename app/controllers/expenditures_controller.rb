@@ -52,7 +52,7 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.find(params[:id])
 
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @expenditure.family.members.include?(current_user)
-    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless @expenditure.family.member_is_above_editor?(current_user)
+    return redirect_to family_path(@expenditure.family), alert: t('alerts.errors.no_permission') unless @expenditure.family.member_is_above_editor?(current_user)
 
     @budgets = @expenditure.family.budgets
     @expenditure_assignees = @expenditure.family.members.map { |member| @expenditure.expenditure_assignees.where(user: member).present? ? @expenditure.expenditure_assignees.where(user: member) : @expenditure.expenditure_assignees.build(user: member) }
@@ -62,7 +62,7 @@ class ExpendituresController < ApplicationController
     @expenditure = Expenditure.find(params[:id])
 
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @expenditure.family.members.include?(current_user)
-    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless @expenditure.family.member_is_above_editor?(current_user)
+    return redirect_to family_path(@expenditure.family), alert: t('alerts.errors.no_permission') unless @expenditure.family.member_is_above_editor?(current_user)
 
     begin
       ActiveRecord::Base.transaction do

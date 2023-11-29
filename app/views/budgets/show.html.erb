@@ -59,8 +59,10 @@
           <div class="card-header">
             <i class="fa-solid fa-comment-dollar"></i>
             Budget Expenses
-            <%= link_to new_expenditure_path(budget_id: @budget.id) do %>
-              <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
+            <% if @budget.family.member_is_above_editor?(current_user) %>
+              <%= link_to new_expenditure_path(budget_id: @budget.id) do %>
+                <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
+              <% end %>
             <% end %>
           </div>
           <div class="card-body">

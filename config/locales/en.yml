@@ -37,4 +37,7 @@ en:
       budget_update: "There was an error updating your budget."
       expense_create: "There was an error creating your expense."
       expense_update: "There was an error updating your expense."
+      family_create: "There was an error creating your family."
+      family_update: "There was an error updating your family."
+      
 
