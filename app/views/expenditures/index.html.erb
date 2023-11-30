@@ -1,22 +1,18 @@
-<main>
-  <div class="container-fluid px-4">
+<h1 class="mt-4">General Expenses</h1>
 
-    <h1 class="mt-4">General Expenses</h1>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><%= @family.family_name %></li>
+  <li class="breadcrumb-item active">Expenses</li>
+</ol>
 
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item active"><%= @family.family_name %></li>
-    </ol>
-
-    <div class="card mb-4">
-      <div class="card-header">
-        <i class="fa-solid fa-comment-dollar"></i>
-        Details
-      </div>
-      <div class="card-body">
-        <table id="detailedExpensesTable">
-          <%= render "expenses_table", expenditures: @family.expenditures.non_budget %>
-        </table>
-      </div>
-    </div>
+<div class="card mb-4">
+  <div class="card-header">
+    <i class="fa-solid fa-comment-dollar"></i>
+    Details
   </div>
-</main>
+  <div class="card-body">
+    <table id="detailedExpensesTable">
+      <%= render "expenses_table", expenditures: @family.expenditures.non_budget %>
+    </table>
+  </div>
+</div>

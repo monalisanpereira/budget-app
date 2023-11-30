@@ -1,19 +1,20 @@
-<main>
-  <div class="container-fluid px-4">
-    <h1 class="mt-4">New Family</h1>
-    <ol class="breadcrumb mb-4"></ol>
-    <%= form_with model: @family do |f| %>
-      <div class="row mb-3">
-        <%= f.label :family_name, class: "col-sm-2 col-form-label" %>
-        <div class="col-sm-5">
-          <%= f.text_field :family_name, class: "form-control" %>
-        </div>
-      </div>
-      <div class="row mb-3">
-        <div class="col-sm-3 offset-sm-5">
-          <%= f.submit "Create Family", class: "btn btn-primary" %>
-        </div>
-      </div>
-    <% end %>
+<h1 class="mt-4">New Family</h1>
+
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Families</li>
+</ol>
+
+<ol class="breadcrumb mb-4"></ol>
+<%= form_with model: @family do |f| %>
+  <div class="row mb-3">
+    <%= f.label :family_name, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-5">
+      <%= f.text_field :family_name, class: "form-control" %>
+    </div>
   </div>
-</main>
+  <div class="row mb-3">
+    <div class="col-sm-3 offset-sm-5">
+      <%= f.submit "Create Family", class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

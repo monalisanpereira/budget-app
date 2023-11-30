@@ -1,53 +1,54 @@
-<main>
-  <div class="container-fluid px-4">
-    <h1 class="mt-4 mb-4"><%= title %></h1>
+<h1 class="mt-4"><%= title %></h1>
 
-    <%= form_with model: @budget do |f| %>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><%= @budget.family.family_name %></li>
+  <li class="breadcrumb-item active">Budgets</li>
+</ol>
 
-      <div class="row mb-3">
-        <%= f.label :period, class: "col-sm-2 col-form-label" %>
-        <div class="col-sm-5">
-          <%= f.select :period, Budget.periods.keys.map { |period| [period.humanize, period] }, { include_blank: 'Select a period' }, class: "form-select", required: true %>
-        </div>
-      </div>
+<%= form_with model: @budget do |f| %>
 
-      <div class="row mb-3">
-        <%= f.label :name, class: "col-sm-2 col-form-label" %>
-        <div class="col-sm-5">
-          <%= f.text_field :name, class: "form-control", required: true%>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <%= f.label :amount, class: "col-sm-2 col-form-label" %>
-        <div class="col-sm-5">
-          <%= f.number_field :amount, class: "form-control", required: true %>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-sm-2 col-form-label">Members' Load</div>
-        <div class="col-sm-5">
-          <% @budget_assignees.each do |budget_assignee| %>
-            <%= f.fields_for :budget_assignees, budget_assignee do |ba| %>
-              <div class="row mb-3">
-                <%= ba.label :percentage, ba.object.user.first_name, class: "col-sm-2 col-form-label" %>
-                <div class="col-sm-3">
-                  <%= ba.hidden_field :user_id %>
-                  <%= ba.number_field :percentage, class: "form-control" %>
-                </div>
-              </div>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-sm-3 offset-sm-5">
-          <%= f.hidden_field :family_id %>
-          <%= f.submit submit_text, class: "btn btn-primary" %>
-        </div>
-      </div>
-    <% end %>
+  <div class="row mb-3">
+    <%= f.label :period, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-5">
+      <%= f.select :period, Budget.periods.keys.map { |period| [period.humanize, period] }, { include_blank: 'Select a period' }, class: "form-select", required: true %>
+    </div>
   </div>
-</main>
+
+  <div class="row mb-3">
+    <%= f.label :name, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-5">
+      <%= f.text_field :name, class: "form-control", required: true%>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <%= f.label :amount, class: "col-sm-2 col-form-label" %>
+    <div class="col-sm-5">
+      <%= f.number_field :amount, class: "form-control", required: true %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-2 col-form-label">Members' Load</div>
+    <div class="col-sm-5">
+      <% @budget_assignees.each do |budget_assignee| %>
+        <%= f.fields_for :budget_assignees, budget_assignee do |ba| %>
+          <div class="row mb-3">
+            <%= ba.label :percentage, ba.object.user.first_name, class: "col-sm-2 col-form-label" %>
+            <div class="col-sm-3">
+              <%= ba.hidden_field :user_id %>
+              <%= ba.number_field :percentage, class: "form-control" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-sm-3 offset-sm-5">
+      <%= f.hidden_field :family_id %>
+      <%= f.submit submit_text, class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>

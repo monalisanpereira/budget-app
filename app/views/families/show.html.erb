@@ -1,87 +1,81 @@
-<main>
-  <div class="container-fluid px-4">
+<div class="mt-4">
+  <h1 class="d-inline align-middle"><%= @family.family_name %></h1>
+  <% if @family.member_is_above_admin?(current_user) %>
+    <h4 class="d-inline align-middle dropdown">
+      <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Edit Family", edit_family_path(@family), class: "dropdown-item" %></li>
+        <li><%= link_to "Manage Members", manage_members_family_path(@family), class: "dropdown-item" %></li>
+      </ul>
+    </h4>
+  <% end %>
+</div>
 
-    <div class="mt-4">
-      <%= render "layouts/error_messages" %>
-      <h1 class="d-inline align-middle"><%= @family.family_name %></h1>
-      <% if @family.member_is_above_admin?(current_user) %>
-        <h4 class="d-inline align-middle dropdown">
-          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Edit Family", edit_family_path(@family), class: "dropdown-item" %></li>
-            <li><%= link_to "Manage Members", manage_members_family_path(@family), class: "dropdown-item" %></li>
-          </ul>
-        </h4>
-      <% end %>
-    </div>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item active">Home</li>
+</ol>
 
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item active">Dashboard</li>
-    </ol>
+<div class="row">
 
-    <div class="row">
-
-      <!-- Left column -->
-      <div class="col-xl-6">
-        <div class="mb-2">
-          <h2 class="d-inline align-middle">Expenses</h2>
-          <h5 class="d-inline align-middle">
-            <% if @family.member_is_above_editor?(current_user) %>
-              <%= link_to new_expenditure_path(family_id: @family.id) do %>
-                <i class="fa-solid fa-circle-plus align-middle px-2 pt-1"></i>
-              <% end %>
-            <% end %>
-          </h5>
-        </div>
-        <div class="card mb-4">
-          <div class="card-header">
-            <i class="fa-solid fa-comment-dollar"></i>
-            General Expenses
-            <%= link_to "Details >", expenditures_path(family_id: @family.id), class: "float-end" %>
-          </div>
-          <div class="card-body">
-            <table id="expensesTable">
-              <%= render "expenses_table", expenditures: @family.expenditures.non_budget %>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Right column -->
-      <div class="col-xl-6">
-        <div class="mb-2">
-          <h2 class="d-inline align-middle">Budgets</h2>
-          <h5 class="d-inline align-middle">
-            <% if @family.member_is_above_editor?(current_user) %>
-              <%= link_to new_budget_path(family_id: @family.id) do %>
-                <i class="fa-solid fa-circle-plus px-2 pt-1"></i>
-              <% end %>
-            <% end %>
-          </h5>
-        </div>
-        <% @family.budgets.each do |budget| %>
-          <div class="card mb-4">
-            <div class="card-header">
-              <i class="fa-solid fa-sack-dollar"></i>
-              <%= budget.name %>
-              <% if @family.member_is_above_editor?(current_user) %>
-                <%= link_to new_expenditure_path(family_id: @family.id, budget_id: budget.id) do %>
-                  <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
-                <% end %>
-              <% end %>
-              <%= link_to "Details >", budget_path(budget), class: "float-end" %>
-            </div>
-            <div class="card-body">
-              <b><%= budget.total_spent.format %></b> spent out of <b><%= budget.amount_as_currency.format %></b> <%= budget.current_period_message %>. <b><%= budget.amount_left.format %></b> left.
-              <table class="datatable">
-                <%= render "expenses_table", expenditures: budget.expenditures %>
-              </table>
-            </div>
-          </div>
+  <!-- Left column -->
+  <div class="col-xl-6">
+    <div class="mb-2">
+      <h2 class="d-inline align-middle">Expenses</h2>
+      <h5 class="d-inline align-middle">
+        <% if @family.member_is_above_editor?(current_user) %>
+          <%= link_to new_expenditure_path(family_id: @family.id) do %>
+            <i class="fa-solid fa-circle-plus align-middle px-2 pt-1"></i>
+          <% end %>
         <% end %>
+      </h5>
+    </div>
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fa-solid fa-comment-dollar"></i>
+        General Expenses
+        <%= link_to "Details >", expenditures_path(family_id: @family.id), class: "float-end" %>
+      </div>
+      <div class="card-body">
+        <table id="expensesTable">
+          <%= render "expenses_table", expenditures: @family.expenditures.non_budget %>
+        </table>
       </div>
     </div>
   </div>
-</main>
+
+  <!-- Right column -->
+  <div class="col-xl-6">
+    <div class="mb-2">
+      <h2 class="d-inline align-middle">Budgets</h2>
+      <h5 class="d-inline align-middle">
+        <% if @family.member_is_above_editor?(current_user) %>
+          <%= link_to new_budget_path(family_id: @family.id) do %>
+            <i class="fa-solid fa-circle-plus px-2 pt-1"></i>
+          <% end %>
+        <% end %>
+      </h5>
+    </div>
+    <% @family.budgets.each do |budget| %>
+      <div class="card mb-4">
+        <div class="card-header">
+          <i class="fa-solid fa-sack-dollar"></i>
+          <%= budget.name %>
+          <% if @family.member_is_above_editor?(current_user) %>
+            <%= link_to new_expenditure_path(family_id: @family.id, budget_id: budget.id) do %>
+              <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
+            <% end %>
+          <% end %>
+          <%= link_to "Details >", budget_path(budget), class: "float-end" %>
+        </div>
+        <div class="card-body">
+          <b><%= budget.total_spent.format %></b> spent out of <b><%= budget.amount_as_currency.format %></b> <%= budget.current_period_message %>. <b><%= budget.amount_left.format %></b> left.
+          <table class="datatable">
+            <%= render "expenses_table", expenditures: budget.expenditures %>
+          </table>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

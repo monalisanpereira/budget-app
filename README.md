@@ -5,8 +5,7 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-30/11 - fix views to add error messages on general layout
-        fix breadcrumbs
+30/11 - fix breadcrumbs
 
 01/12 - make it possible to choose different currencies on family new/edit
         make it possible to edit users' roles

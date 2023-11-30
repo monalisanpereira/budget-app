@@ -1,77 +1,65 @@
-<main>
-  <div class="container-fluid px-4">
+<div class="mt-4">
+  <h1 class="d-inline align-middle"><%= @budget.name %></h1>
+  <% if @budget.family.member_is_above_admin?(current_user) %>
+    <h4 class="d-inline align-middle dropdown">
+      <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i>
+      </a>
+      <ul class="dropdown-menu">
+        <li><%= link_to "Edit Budget", edit_budget_path(@budget), class: "dropdown-item" %></li>
+      </ul>
+    </h4>
+  <% end %>
+</div>
 
-    <% flash.each do |key, value| %>
-      <div class="alert alert-danger alert-dismissible <%= key %>">
-        <%= value %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+<ol class="breadcrumb mb-4">
+  <li class="breadcrumb-item"><%= @budget.family.family_name %></li>
+  <li class="breadcrumb-item active">Budgets</li>
+</ol>
+
+<div class="row">
+  
+  <!-- Left column -->
+  <div class="col-xl-5">
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fa-solid fa-comment-dollar"></i>
+        Details
       </div>
-    <% end %>
-
-    <div class="mt-4">
-      <h1 class="d-inline align-middle"><%= @budget.name %></h1>
-      <% if current_user.owner?(@budget.family) %>
-        <h4 class="d-inline align-middle dropdown">
-          <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-ellipsis-vertical px-2 pt-2"></i>
-          </a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Edit Budget", edit_budget_path(@budget), class: "dropdown-item" %></li>
-          </ul>
-        </h4>
-      <% end %>
-    </div>
-
-    <ol class="breadcrumb mb-4">
-      <li class="breadcrumb-item"><%= @budget.family.family_name %></li>
-      <li class="breadcrumb-item active">Budgets</li>
-    </ol>
-
-    <div class="row">
-      
-      <!-- Left column -->
-      <div class="col-xl-5">
-        <div class="card mb-4">
-          <div class="card-header">
-            <i class="fa-solid fa-comment-dollar"></i>
-            Details
-          </div>
-          <div class="card-body">
-              <%= render "period_select", budget: @budget %>
-            <p>
-              <b><%= @budget.total_spent(@period_range).format %></b> spent out of <b><%= @budget.amount_as_currency.format %></b> <%= @budget.current_period_message %>. <b><%= @budget.amount_left(@period_range).format %></b> left.
-            </p>
-            <div class="progress">
-              <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: <%= @budget.total_percentage_spent(@period_range) %>%" aria-valuenow="<%= @budget.total_percentage_spent(@period_range) %>" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
-            <% @budget.budget_assignees.each do |assignee| %>
-              <div class="mt-4">
-                <%= assignee.user.first_name %>: <%= assignee.individual(@budget.total_spent(@period_range)).format %> out of <%= assignee.individual(@budget.amount_as_currency).format %>
-              </div>
-            <% end %>
-          </div>
+      <div class="card-body">
+          <%= render "period_select", budget: @budget %>
+        <p>
+          <b><%= @budget.total_spent(@period_range).format %></b> spent out of <b><%= @budget.amount_as_currency.format %></b> <%= @budget.current_period_message %>. <b><%= @budget.amount_left(@period_range).format %></b> left.
+        </p>
+        <div class="progress">
+          <div class="progress-bar" role="progressbar" aria-label="Basic example" style="width: <%= @budget.total_percentage_spent(@period_range) %>%" aria-valuenow="<%= @budget.total_percentage_spent(@period_range) %>" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
-      </div>
-
-      <!-- Right column -->
-      <div class="col-xl-7">
-        <div class="card mb-4">
-          <div class="card-header">
-            <i class="fa-solid fa-comment-dollar"></i>
-            Budget Expenses
-            <% if @budget.family.member_is_above_editor?(current_user) %>
-              <%= link_to new_expenditure_path(budget_id: @budget.id) do %>
-                <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
-              <% end %>
-            <% end %>
+        <% @budget.budget_assignees.each do |assignee| %>
+          <div class="mt-4">
+            <%= assignee.user.first_name %>: <%= assignee.individual(@budget.total_spent(@period_range)).format %> out of <%= assignee.individual(@budget.amount_as_currency).format %>
           </div>
-          <div class="card-body">
-            <table id="detailedExpensesTable">
-              <%= render "expenses_table", expenditures: @expenditures %>
-            </table>
-          </div>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
-</main>
+
+  <!-- Right column -->
+  <div class="col-xl-7">
+    <div class="card mb-4">
+      <div class="card-header">
+        <i class="fa-solid fa-comment-dollar"></i>
+        Budget Expenses
+        <% if @budget.family.member_is_above_editor?(current_user) %>
+          <%= link_to new_expenditure_path(budget_id: @budget.id) do %>
+            <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="card-body">
+        <table id="detailedExpensesTable">
+          <%= render "expenses_table", expenditures: @expenditures %>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
