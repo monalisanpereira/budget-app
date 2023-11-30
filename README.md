@@ -5,10 +5,7 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-30/11 - fix breadcrumbs
-
-01/12 - make it possible to choose different currencies on family new/edit
-        make it possible to edit users' roles
+01/12 - make it possible to edit users' roles
         add return button to new/edit pages
 
 02/12 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?

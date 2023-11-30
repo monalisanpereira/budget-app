@@ -26,7 +26,7 @@ class FamiliesController < ApplicationController
     @family = Family.find(params[:id])
 
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @family.members.include?(current_user)
-    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_admin?(current_user)
+    return redirect_to family_path(@family), alert: t('alerts.errors.no_permission') unless @family.member_is_above_admin?(current_user)
 
     if @family.update(family_params)
       redirect_to family_path(@family)
@@ -64,6 +64,6 @@ class FamiliesController < ApplicationController
   private
 
   def family_params
-    params.require(:family).permit(:family_name)
+    params.require(:family).permit(:family_name, :currency)
   end
 end

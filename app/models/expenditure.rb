@@ -16,10 +16,6 @@ class Expenditure < ApplicationRecord
   validate  :presence_of_assignees_or_budget
   validate  :assignee_percentage_coverage
 
-  def amount_as_currency
-    Money.from_amount(self.amount, "JPY")
-  end
-
   private
 
   def presence_of_assignees_or_budget

@@ -60,7 +60,7 @@ class Budget < ApplicationRecord
   end
 
   def total_spent(period_range = self.period_range(self.current_period))
-    total = Money.from_amount(0, "JPY")
+    total = Money.from_amount(0, self.family.currency)
     self.expenditures.in_period(period_range).each do |expenditure|
       total += expenditure.amount_as_currency
     end
