@@ -5,20 +5,16 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-29/11 - CONTROLLER: authorization, error alerts, redirect path (budgets ok, expenditures ok, families ok)
-        VIEW: hide buttons and options if not authorized (ok?)
-        fix views to add error messages on general layout
+30/11 - fix views to add error messages on general layout
+        fix breadcrumbs
 
-29/11 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
+01/12 - make it possible to choose different currencies on family new/edit
+        make it possible to edit users' roles
+        add return button to new/edit pages
 
-fix breadcrumbs
-make it possible to edit users' roles
-make it possible to choose different currencies on family new/edit
-add return button to new/edit pages
+02/12 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
 
-30/11 - make video etc
-
-30/11 - submission deadline
+03/12 - make video and submit
 
 ## NICE TO HAVE
 

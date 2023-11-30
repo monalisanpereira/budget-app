@@ -19,7 +19,7 @@ class FamiliesController < ApplicationController
     @family = Family.find(params[:id])
 
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @family.members.include?(current_user)
-    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_admin?(current_user)
+    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless @family.member_is_above_admin?(current_user)
   end
 
   def update
@@ -56,7 +56,7 @@ class FamiliesController < ApplicationController
     @family = Family.find(params[:id])
 
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @family.members.include?(current_user)
-    return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_admin?(current_user)
+    return redirect_to family_path(@family), alert: t('alerts.errors.no_permission') unless @family.member_is_above_admin?(current_user)
 
     @family_member = @family.family_members.build
   end

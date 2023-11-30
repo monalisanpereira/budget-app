@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       session[:user_id] = @user.id 
       redirect_to root_path
     else 
-      redirect_to '/signup' 
+      redirect_to signup_path, alert: t('alerts.errors.user_create')
     end 
   end
 
@@ -22,18 +22,18 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    return redirect_to root_path unless @user == current_user
+    return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @user == current_user
 
     if @user.update(user_params)
       redirect_to profile_path
     else 
-      redirect_to edit_user_path(current_user) 
+      redirect_to profile_path, alert: t('alerts.errors.user_update')
     end 
   end
 
   def destroy
     @user = User.find(params[:id])
-    return redirect_to edit_user_path(current_user) unless @user == current_user
+    return redirect_to profile_path, alert: t('alerts.errors.no_permission') unless @user == current_user
 
     @user.destroy
     session[:user_id] = nil

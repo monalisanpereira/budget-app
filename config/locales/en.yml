@@ -39,5 +39,9 @@ en:
       expense_update: "There was an error updating your expense."
       family_create: "There was an error creating your family."
       family_update: "There was an error updating your family."
-      
+      family_member_create: "There was an error adding a member to your family."
+      family_member_destroy: "There was an error removing a member from your family."
+      session_create: "There was an error logging in."
+      user_create: "There was an error creating your account."
+      user_update: "There was an error updating your profile."
 

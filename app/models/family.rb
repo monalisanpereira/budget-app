@@ -20,4 +20,8 @@ class Family < ApplicationRecord
     end
     false
   end
+
+  def owner
+    self.family_members.owner.user
+  end
 end

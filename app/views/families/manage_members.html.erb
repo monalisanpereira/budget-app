@@ -23,7 +23,7 @@
           <%= member.full_name %>
         </div>
         <div class="col-sm-5">
-          <% unless member.owner?(@family) %>
+          <% unless member == @family.owner %>
             <%= link_to "Remove Member", family_member_path(FamilyMember.where(user: member, family: @family).first), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "btn btn-danger" %>
           <% end %>
         </div>
