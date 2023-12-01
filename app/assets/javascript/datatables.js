@@ -1,4 +1,4 @@
-window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('turbo:load', event => {
   // Simple-DataTables
   // https://fiduswriter.github.io/simple-datatables/documentation/
   

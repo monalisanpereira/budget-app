@@ -5,10 +5,8 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-01/12 - make it possible to edit users' roles
+02/12 - make it possible to edit users' roles
         add return button to new/edit pages
-
-02/12 - fix bootstrap/rails 7 issue: dropdown not working when changing pages bc of turbolinks?
 
 03/12 - make video and submit
 

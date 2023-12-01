@@ -17,7 +17,7 @@ class ExpendituresController < ApplicationController
       return redirect_to root_path, alert: t('alerts.errors.expense_create')
     end
 
-    return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @family.members.include?(current_user)
+    return redirect_to root_path, alert: t('alerts.errors.no_permission') unless family.members.include?(current_user)
     return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_editor?(current_user)
 
     @budgets = family.budgets
