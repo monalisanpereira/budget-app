@@ -44,4 +44,5 @@ en:
       session_create: "There was an error logging in."
       user_create: "There was an error creating your account."
       user_update: "There was an error updating your profile."
+      family_member_update: "There was an error updating the member's role."
 

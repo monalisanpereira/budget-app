@@ -16,12 +16,10 @@
 <% end %>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var periodField = document.getElementById('period-field');
-    var periodForm = document.getElementById('period-form');
+  var periodField = document.getElementById('period-field');
+  var periodForm = document.getElementById('period-form');
 
-    periodField.addEventListener('change', function() {
-      periodForm.submit();
-    });
+  periodField.addEventListener('change', function() {
+    periodForm.submit();
   });
 </script>

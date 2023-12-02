@@ -5,8 +5,7 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-02/12 - make it possible to edit users' roles
-        add return button to new/edit pages
+make it possible to edit users' roles and add return button to new/edit pages
 
 03/12 - make video and submit
 

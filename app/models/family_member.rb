@@ -2,7 +2,7 @@ class FamilyMember < ApplicationRecord
     belongs_to :user
     belongs_to :family
 
-    enum :role, [ :owner, :admin, :editor, :viewer ]
+    enum :role, [ :owner, :admin, :editor, :viewer ], default: :viewer
 
     scope :owner, -> { where(role: :owner).first }
     scope :admins, -> { where(role: :admin) }

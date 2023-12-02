@@ -15,6 +15,19 @@ class FamilyMembersController < ApplicationController
     end
   end
 
+  def update
+    @family_member = FamilyMember.find(params[:id])
+
+    return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @family_member.family.members.include?(current_user)
+    return redirect_to family_path(@family_member.family), alert: t('alerts.errors.no_permission') unless @family_member.family.member_is_above_admin?(current_user)
+
+    if @family_member.update(family_member_params)
+      redirect_to manage_members_family_path(@family_member.family)
+    else 
+      redirect_to manage_members_family_path(@family_member.family), alert: t('alerts.errors.family_member_update')
+    end 
+  end
+
   def destroy
     family_member = FamilyMember.find(params[:id])
     family = family_member.family
@@ -30,6 +43,6 @@ class FamilyMembersController < ApplicationController
   end
 
   def family_member_params
-    params.require(:family_member).permit(:user_email, :family_id)
+    params.require(:family_member).permit(:user_email, :family_id, :role)
   end
 end
