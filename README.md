@@ -5,9 +5,12 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-make it possible to edit users' roles and add return button to new/edit pages
-
-03/12 - make video and submit
+% no exp assignees form
+add success messages (edit user role)
+add links to breadcrumbs
+js do expenditure funciona quando quer
+botao de add exp no general exp
+% no exp assignees form
 
 ## NICE TO HAVE
 

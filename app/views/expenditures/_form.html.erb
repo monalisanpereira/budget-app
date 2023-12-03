@@ -94,7 +94,7 @@
               <%= ea.label :percentage, ea.object.user.first_name, class: "col-sm-2 col-form-label" %>
               <div class="col-sm-2">
                 <%= ea.hidden_field :user_id %>
-                <%= ea.number_field :percentage, class: "form-control" %>
+                <%= ea.number_field :percentage, class: "form-control" %> %
               </div>
             </div>
           <% end %>
@@ -113,7 +113,7 @@
   </div>
 <% end %>
 
-<script>
+<script defer>
   var budgetOptionButton = document.getElementById("budget-option-button");
   var generalOptionButton = document.getElementById("general-option-button");
   var budgetSelectField = document.getElementById("budget-field");

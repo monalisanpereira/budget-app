@@ -15,7 +15,7 @@ class BudgetsController < ApplicationController
   end
   
   def create
-    return redirect_to root_path, alert:  t('alerts.errors.budget_create') unless params[:family_id].present?
+    return redirect_to root_path, alert: t('alerts.errors.budget_create') unless budget_params[:family_id].present?
 
     family = Family.find(budget_params[:family_id])
 
@@ -23,7 +23,7 @@ class BudgetsController < ApplicationController
     return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_editor?(current_user)
 
     @budget = Budget.new(budget_params)
-  
+
     if @budget.save
       redirect_to budget_path(@budget)
     else

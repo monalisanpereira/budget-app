@@ -8,7 +8,7 @@ class FamiliesController < ApplicationController
   def create
     @family = Family.new(family_params)
     if @family.save
-      @family.family_members.create(user: current_user, is_owner: true)
+      @family.family_members.create(user: current_user, role: "owner")
       redirect_to family_path(@family)
     else
       redirect_to new_family_path, alert: t('alerts.errors.family_create')
