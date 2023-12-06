@@ -31,6 +31,17 @@
 
 en:
   alerts:
+    success:
+      budget_create: "Your budget was created successfully."
+      budget_update: "Your budget was updated successfully."
+      expense_create: "Your expense was created successfully."
+      expense_update: "Your expense was updated successfully."
+      family_create: "Your family was created successfully."
+      family_update: "Your family was updated successfully."
+      family_member_update: "Member's role updated successfully."
+      family_member_create: "The new member was added successfully."
+      family_member_destroy: "The members was removed successfully."
+      user_update: "Your profile was updated successfully."
     errors:
       no_permission: "You do not have permisson for this action."
       budget_create: "There was an error creating your budget."
@@ -40,9 +51,9 @@ en:
       family_create: "There was an error creating your family."
       family_update: "There was an error updating your family."
       family_member_create: "There was an error adding a member to your family."
+      family_member_update: "There was an error updating the member's role."
       family_member_destroy: "There was an error removing a member from your family."
       session_create: "There was an error logging in."
       user_create: "There was an error creating your account."
       user_update: "There was an error updating your profile."
-      family_member_update: "There was an error updating the member's role."
 

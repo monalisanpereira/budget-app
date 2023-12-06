@@ -5,8 +5,6 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-% no exp assignees form
-add success messages (edit user role)
 add links to breadcrumbs
 js do expenditure funciona quando quer
 botao de add exp no general exp

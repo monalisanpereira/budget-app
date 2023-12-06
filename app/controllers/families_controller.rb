@@ -9,7 +9,7 @@ class FamiliesController < ApplicationController
     @family = Family.new(family_params)
     if @family.save
       @family.family_members.create(user: current_user, role: "owner")
-      redirect_to family_path(@family)
+      redirect_to family_path(@family), notice: t('alerts.success.family_create') 
     else
       redirect_to new_family_path, alert: t('alerts.errors.family_create')
     end
@@ -29,7 +29,7 @@ class FamiliesController < ApplicationController
     return redirect_to family_path(@family), alert: t('alerts.errors.no_permission') unless @family.member_is_above_admin?(current_user)
 
     if @family.update(family_params)
-      redirect_to family_path(@family)
+      redirect_to family_path(@family), notice: t('alerts.success.family_update')
     else 
       redirect_to edit_family_path(@family), alert: t('alerts.errors.family_update')
     end 

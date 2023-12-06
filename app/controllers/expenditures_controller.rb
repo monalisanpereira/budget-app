@@ -39,12 +39,12 @@ class ExpendituresController < ApplicationController
 
     if @expenditure.save
       if @expenditure.budget.present?
-        redirect_to budget_path(@expenditure.budget)
+        redirect_to budget_path(@expenditure.budget), notice: t('alerts.success.expense_create')
       else
-        redirect_to expenditures_path(family_id: @expenditure.family.id)
+        redirect_to expenditures_path(family_id: @expenditure.family.id), notice: t('alerts.success.expense_create')
       end
     else
-      redirect_to family_path(@expenditure.family), alert:  t('alerts.errors.expense_create')
+      redirect_to family_path(@expenditure.family), alert: t('alerts.errors.expense_create')
     end
   end
 
@@ -87,13 +87,13 @@ class ExpendituresController < ApplicationController
         @expenditure.update!(filtered_params)
 
         if @expenditure.budget.present?
-          redirect_to budget_path(@expenditure.budget)
+          redirect_to budget_path(@expenditure.budget), notice: t('alerts.success.expense_update')
         else
-          redirect_to expenditures_path(family_id: @expenditure.family.id)
+          redirect_to expenditures_path(family_id: @expenditure.family.id), notice: t('alerts.success.expense_update')
         end
       end
     rescue StandardError => e
-      redirect_to edit_expenditure_path(@expenditure), alert:  t('alerts.errors.expense_update')
+      redirect_to edit_expenditure_path(@expenditure), alert: t('alerts.errors.expense_update')
     end
   end
 

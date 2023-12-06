@@ -9,7 +9,7 @@ class FamilyMembersController < ApplicationController
 
     @family_member = family.family_members.build(user: User.find_by_email(family_member_params[:user_email]))
     if @family_member.save
-      redirect_to manage_members_family_path(family)
+      redirect_to manage_members_family_path(family), notice: t('alerts.success.family_member_create') 
     else
       redirect_to manage_members_family_path(family), alert: t('alerts.errors.family_member_create')
     end
@@ -22,7 +22,7 @@ class FamilyMembersController < ApplicationController
     return redirect_to family_path(@family_member.family), alert: t('alerts.errors.no_permission') unless @family_member.family.member_is_above_admin?(current_user)
 
     if @family_member.update(family_member_params)
-      redirect_to manage_members_family_path(@family_member.family)
+      redirect_to manage_members_family_path(@family_member.family), notice: t('alerts.success.family_member_update')
     else 
       redirect_to manage_members_family_path(@family_member.family), alert: t('alerts.errors.family_member_update')
     end 
@@ -36,7 +36,7 @@ class FamilyMembersController < ApplicationController
     return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless family.member_is_above_admin?(current_user)
 
     if family_member.destroy
-      redirect_to manage_members_family_path(family)
+      redirect_to manage_members_family_path(family), notice: t('alerts.success.family_member_destroy')
     else
       redirect_to manage_members_family_path(family), alert: t('alerts.errors.family_member_destroy')
     end

@@ -25,7 +25,7 @@ class BudgetsController < ApplicationController
     @budget = Budget.new(budget_params)
 
     if @budget.save
-      redirect_to budget_path(@budget)
+      redirect_to budget_path(@budget), notice: t('alerts.success.budget_create')
     else
       redirect_to new_budget_path(family_id: @budget.family.id), alert:  t('alerts.errors.budget_create')
     end
@@ -47,7 +47,7 @@ class BudgetsController < ApplicationController
     return redirect_to family_path(family), alert: t('alerts.errors.no_permission') unless @budget.family.member_is_above_editor?(current_user)
 
     if @budget.update(budget_params)
-      redirect_to budget_path(@budget)
+      redirect_to budget_path(@budget), notice: t('alerts.success.budget_update')
     else
       redirect_to edit_budget_path(@budget), alert:  t('alerts.errors.budget_update')
     end

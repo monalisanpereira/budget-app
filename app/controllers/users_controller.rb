@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     return redirect_to root_path, alert: t('alerts.errors.no_permission') unless @user == current_user
 
     if @user.update(user_params)
-      redirect_to profile_path
+      redirect_to profile_path, notice: t('alerts.success.user_update')
     else 
       redirect_to profile_path, alert: t('alerts.errors.user_update')
     end 
