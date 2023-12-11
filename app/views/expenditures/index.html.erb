@@ -6,6 +6,11 @@
   <div class="card-header">
     <i class="fa-solid fa-comment-dollar"></i>
     Details
+    <% if @family.member_is_above_editor?(current_user) %>
+      <%= link_to new_expenditure_path(family_id: @family.id) do %>
+        <i class="fa-solid fa-circle-plus align-middle px-2 pb-1"></i>
+      <% end %>
+    <% end %>
   </div>
   <div class="card-body">
     <table id="detailedExpensesTable">

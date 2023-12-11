@@ -1,20 +1,18 @@
-<div class="mt-4">
-  <% flash.each do |key, value| %>
-    <% if key == "notice" %>
-      <div class="alert alert-success alert-dismissible" role="<%= key %>">
-        <%= value %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% elsif key == "alert" %>
-      <div class="alert alert-danger alert-dismissible" role="<%= key %>">
-        <%= value %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% else %>
-      <div class="alert alert-dark alert-dismissible" role="<%= key %>">
-        <%= value %>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-    <% end %>
+<% flash.each do |key, value| %>
+  <% if key == "notice" %>
+    <div class="alert alert-success alert-dismissible" role="<%= key %>">
+      <%= value %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% elsif key == "alert" %>
+    <div class="alert alert-danger alert-dismissible" role="<%= key %>">
+      <%= value %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% else %>
+    <div class="alert alert-dark alert-dismissible" role="<%= key %>">
+      <%= value %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
   <% end %>
-</div>
+<% end %>

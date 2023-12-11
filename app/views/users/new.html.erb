@@ -11,34 +11,34 @@
               <div class="row mb-3">
                 <div class="col-md-6">
                   <div class="form-floating mb-3 mb-md-0">
-                    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name" %>
+                    <%= f.text_field :first_name, class: "form-control", placeholder: "Enter your first name", required: true %>
                     <%= f.label :first_name %>
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-floating">
-                    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name" %>
+                    <%= f.text_field :last_name, class: "form-control", placeholder: "Enter your last name", required: true %>
                     <%= f.label :last_name %>
                   </div>
                 </div>
               </div>
               <div class="form-floating mb-3">
-                <%= f.text_field :email, class: "form-control", placeholder: "Enter your email" %>
+                <%= f.text_field :email, class: "form-control", placeholder: "Enter your email", required: true %>
                 <%= f.label :email %>
               </div>
               <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-12">
                   <div class="form-floating mb-3 mb-md-0">
-                    <%= f.password_field :password, class: "form-control", placeholder: "Create a password" %>
+                    <%= f.password_field :password, class: "form-control", placeholder: "Create a password", required: true %>
                     <%= f.label :password %>
                   </div>
                 </div>
-                <div class="col-md-6">
+                <!-- <div class="col-md-6">
                   <div class="form-floating mb-3 mb-md-0">
-                    <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                    <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" required="true" />
                     <label for="inputPasswordConfirm">Confirm Password</label>
                   </div>
-                </div>
+                </div> -->
               </div>
               <div class="mt-4 mb-0">
                 <div class="d-grid">

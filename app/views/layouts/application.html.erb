@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Cs50FinalProject</title>
+    <title>Family Budget</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -22,8 +22,10 @@
         <%= render "layouts/sidebar" %>
         <div id="layoutSidenav_content">
           <main>
-            <div class="container-fluid px-4"> 
-              <%= render "layouts/error_messages" %>
+            <div class="container-fluid px-4">
+              <div class="mt-4">
+                <%= render "layouts/error_messages" %>
+              </div>
               <%= yield %>
             </div>
           </main>
@@ -47,7 +49,9 @@
     <% else %>
       <div id="layoutAuthentication">
         <div id="layoutAuthentication_content">
-          <%= render "layouts/error_messages" %>
+          <div class="mt-5 pt-3 mx-2">
+            <%= render "layouts/error_messages" %>
+          </div>
           <%= yield %>
         </div>
 

@@ -5,8 +5,6 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-js do expenditure funciona quando quer
-botao de add exp no general exp
 
 ## NICE TO HAVE
 

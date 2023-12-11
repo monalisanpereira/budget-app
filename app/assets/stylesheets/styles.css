@@ -10858,6 +10858,7 @@ body {
 #layoutAuthentication #layoutAuthentication_content {
   min-width: 0;
   flex-grow: 1;
+  min-height: calc(100vh - 56px);
 }
 #layoutAuthentication #layoutAuthentication_footer {
   min-width: 0;
