@@ -2,10 +2,7 @@
 
 <h1 class="mt-4"><%= title %></h1>
 
-<ol class="breadcrumb mb-4">
-  <li class="breadcrumb-item"><%= @expenditure.family.family_name %></li>
-  <li class="breadcrumb-item active">Expenses</li>
-</ol>
+<%= render "layouts/breadcrumbs", page: "Expenses", family: @expenditure.family %>
 
 <%= form_with model: @expenditure do |f| %>
 

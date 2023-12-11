@@ -12,10 +12,7 @@
   <% end %>
 </div>
 
-<ol class="breadcrumb mb-4">
-  <li class="breadcrumb-item"><%= @budget.family.family_name %></li>
-  <li class="breadcrumb-item active">Budgets</li>
-</ol>
+<%= render "layouts/breadcrumbs", page: "Budgets", family: @budget.family %>
 
 <div class="row">
   

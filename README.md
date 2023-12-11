@@ -5,10 +5,8 @@ https://startbootstrap.com/template/sb-admin
 # Todo
 ## MUST
 
-add links to breadcrumbs
 js do expenditure funciona quando quer
 botao de add exp no general exp
-% no exp assignees form
 
 ## NICE TO HAVE
 

@@ -1,9 +1,6 @@
 <h1 class="mt-4">General Expenses</h1>
 
-<ol class="breadcrumb mb-4">
-  <li class="breadcrumb-item"><%= @family.family_name %></li>
-  <li class="breadcrumb-item active">Expenses</li>
-</ol>
+<%= render "layouts/breadcrumbs", page: "Expenses", family: @family %>
 
 <div class="card mb-4">
   <div class="card-header">

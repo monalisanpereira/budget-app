@@ -1,0 +1,20 @@
+<ol class="breadcrumb mb-4">
+
+  <% unless current_page?(root_path) %>
+    <li class="breadcrumb-item">
+      <%= link_to "Home", root_path %>
+    </li>
+  <% end %>
+
+  <% if defined?(family) %>
+    <li class="breadcrumb-item">
+      <%= link_to family.family_name, family_path(family) %>
+    </li>
+  <% end %>
+
+  <% if defined?(page) %>
+    <li class="breadcrumb-item active">
+      <%= page %>
+    </li>
+  <% end %>
+</ol>
